@@ -1,5 +1,3 @@
-# (c) @EverythingSuckz | @AbirHasan2005
-
 import asyncio
 from Megatron.bot import StreamBot
 from Megatron.utils.database import Database
@@ -33,11 +31,11 @@ async def private_receive_handler(c: Client, m: Message):
         except UserNotParticipant:
             await c.send_message(
                 chat_id=m.chat.id,
-                text="**Please Join Updates Channel to use this Bot!**\n\nOnly Channel Subscribers can use the Bot!",
+                text="**Please join updates channel to use me**\nOnly channel subscribers can use the bot\nAfter joining tap help button\n\n✨لطفا در چنل عضو شوید. تنها اعضای چنل می توانند از بات استفاده کنند.\nپس از عضویت بر روی /help کلیک کنید.",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("🤖 Join Updates Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
+                            InlineKeyboardButton("✵ Join Updates Channel ✵", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
                         ]
                     ]
                 ),
@@ -103,7 +101,7 @@ async def channel_receive_handler(bot, broadcast):
             message_id=broadcast.message_id,
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton("Get Direct Download Link", url=f"https://t.me/FiletoLinkTelegramBot?start=CipherXBot_{str(log_msg.message_id)}")]
+                    [InlineKeyboardButton("✵ Direct Download Link ✵", url=f"https://t.me/FiletoLinkTelegramBot?start=CipherXBot_{str(log_msg.message_id)}")]
                 ]
             )
         )
