@@ -54,7 +54,7 @@ async def start(b, m):
             text="🙋 Hey Dear\nI'm Instant Telegram File to Link Generator Bot.\n\nSend me any file & see the magic!",
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton('Update Channel', url='https://t.me/joinchat/mVWCZj8Pn1IwZDY0'), InlineKeyboardButton('Support Group', url='https://t.me/joinchat/riq-psSksFtiMDU8')],
+                    [InlineKeyboardButton('Updates Channel', url='https://t.me/FutureTechnologyOfficial'), InlineKeyboardButton('Support Group', url='https://t.me/joinchat/riq-psSksFtiMDU8')],
                     [InlineKeyboardButton('Developer', url='https://t.me/CipherXBot')]
                 ]
             ),
@@ -83,7 +83,7 @@ async def start(b, m):
                             ],
                             [
                                 InlineKeyboardButton("🔄 Refresh / Try Again",
-                                                     url=f"https://t.me/FiletoLinkTelegramBot?start=CipherXBot_{usr_cmd}")
+                                                     url=f"https://t.me/FiletoLinkTelegramBot?start=FutureTechnologyOfficial_{usr_cmd}")
                             ]
                         ]
                     ),
@@ -175,7 +175,7 @@ async def help_handler(bot, message):
         disable_web_page_preview=True,
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton("Support Group", url="https://t.me/joinchat/riq-psSksFtiMDU8"), InlineKeyboardButton("Update Channel", url="https://t.me/joinchat/mVWCZj8Pn1IwZDY0")],
+                [InlineKeyboardButton("Support Group", url="https://t.me/joinchat/riq-psSksFtiMDU8"), InlineKeyboardButton("Update Channel", url="https://t.me/FutureTechnologyOfficial")],
                 [InlineKeyboardButton("Developer", url="https://t.me/CipherXBot")]
             ]
         )
