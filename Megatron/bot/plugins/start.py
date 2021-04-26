@@ -32,11 +32,11 @@ async def start(b, m):
             except UserNotParticipant:
                 await b.send_message(
                     chat_id=m.chat.id,
-                    text="**Please Join Updates Channel to use me**\n\nOnly Channel Subscribers can use the Bot!",
+                    text="**Please join updates channel to use me**\nOnly channel subscribers can use the bot\nAfter joining tap help button\n\n✨لطفا در چنل عضو شوید. تنها اعضای چنل می توانند از بات استفاده کنند.\nپس از عضویت بر روی /help کلیک کنید.",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("🤖 Join Updates Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
+                                InlineKeyboardButton("✵ Join Updates Channel ✵", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
                             ]
                         ]
                     ),
@@ -51,11 +51,11 @@ async def start(b, m):
                     disable_web_page_preview=True)
                 return
         await m.reply_text(
-            text="🙋 Hey Dear\nI'm Instant Telegram File to Link Generator Bot.\n\nSend me any file & see the magic!",
+            text="Hey Dear 🙋🏻‍♂️\nI'm Telegram File to Link Generator Bot.\n\nSend me any file & get the fast direct download link!\n\nسلام کاربر عزیز 🙋🏻‍♂️\nمن بات تبدیل فایل به لینک هستم\nفایل تلگرامی خود را ارسال کنید تا لینک دانلود پر سرعت آن را دریافت نمایید ",
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton('Updates Channel', url='https://t.me/FutureTechnologyOfficial'), InlineKeyboardButton('Support Group', url='https://t.me/joinchat/riq-psSksFtiMDU8')],
-                    [InlineKeyboardButton('Developer', url='https://t.me/CipherXBot')]
+                    [InlineKeyboardButton('✵ Updates Channel ✵', url='https://t.me/FutureTechnologyOfficial'), InlineKeyboardButton('✵ Support Group ✵', url='https://t.me/joinchat/riq-psSksFtiMDU8')],
+                    [InlineKeyboardButton('✵ Developer ✵', url='https://t.me/CipherXBot')]
                 ]
             ),
             disable_web_page_preview=True
@@ -75,11 +75,11 @@ async def start(b, m):
             except UserNotParticipant:
                 await b.send_message(
                     chat_id=m.chat.id,
-                    text="**Please Join Updates Channel to use me**\n\nOnly Channel Subscribers can use the Bot!",
+                    text="****Please join updates channel to use me**\nOnly channel subscribers can use the bot\nAfter joining tap help button\n\n✨لطفا در چنل عضو شوید. تنها اعضای چنل می توانند از بات استفاده کنند.\nپس از عضویت بر روی /help کلیک کنید.",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("🤖 Join Updates Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
+                                InlineKeyboardButton("✵ Join Updates Channel ✵", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
                             ],
                             [
                                 InlineKeyboardButton("🔄 Refresh / Try Again",
@@ -121,11 +121,11 @@ async def start(b, m):
                                      Var.PORT,
                                      get_msg.message_id)
 
-        msg_text = "Your Link Generated! 🤓\n\n📂 **File Name:** `{}`\n**File Size:** `{}`\n\n📥 **Download Link:** `{}`"
+        msg_text = "Your Link Generated! 😄\n\nلینک پر سرعت شما ایجاد شد! 😄\n\n📂 **File Name:** `{}`\n**File Size:** `{}`\n\n📥 **Download Link:** `{}`"
         await m.reply_text(
             text=msg_text.format(file_name, file_size, stream_link),
             parse_mode="Markdown",
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Download Now", url=stream_link)]])
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✵ Download Now ✵", url=stream_link)]])
         )
 
 
@@ -151,11 +151,11 @@ async def help_handler(bot, message):
         except UserNotParticipant:
             await bot.send_message(
                 chat_id=message.chat.id,
-                text="**Please Join Updates Channel to use me**\n\nOnly Channel Subscribers can use the Bot!",
+                text="****Please join updates channel to use me**\nOnly channel subscribers can use the bot\nAfter joining tap help button\n\n✨لطفا در چنل عضو شوید. تنها اعضای چنل می توانند از بات استفاده کنند.\nپس از عضویت بر روی /help کلیک کنید.",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("🤖 Join Updates Channel", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
+                            InlineKeyboardButton("✵ Join Updates Channel ✵", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
                         ]
                     ]
                 ),
@@ -175,8 +175,8 @@ async def help_handler(bot, message):
         disable_web_page_preview=True,
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton("Support Group", url="https://t.me/joinchat/riq-psSksFtiMDU8"), InlineKeyboardButton("Update Channel", url="https://t.me/FutureTechnologyOfficial")],
-                [InlineKeyboardButton("Developer", url="https://t.me/CipherXBot")]
+                [InlineKeyboardButton("✵ Support Group ✵", url="https://t.me/joinchat/riq-psSksFtiMDU8"), InlineKeyboardButton("✵ Update Channel ✵", url="https://t.me/FutureTechnologyOfficial")],
+                [InlineKeyboardButton("✵ Developer ✵", url="https://t.me/CipherXBot")]
             ]
         )
     )
