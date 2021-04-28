@@ -68,11 +68,11 @@ async def private_receive_handler(c: Client, m: Message):
             
     try:
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
-        stream_link = "https://{}/{}/{}".format(Var.FQDN, file_name, log_msg.message_id) if Var.ON_HEROKU or Var.NO_PORT else \
+        stream_link = "https://{}/{}/{}".format(Var.FQDN, log_msg.message_id, file_name) if Var.ON_HEROKU or Var.NO_PORT else \
             "http://{}:{}/{}/{}".format(Var.FQDN,
                                     Var.PORT,
-                                    file_name,
-                                    log_msg.message_id)
+                                    log_msg.message_id,
+                                    file_name)
             
         msg_text = "Your Link Generated! 😄\n\nلینک پر سرعت شما ایجاد شد! \n\n📂 **File Name:** `{}`\n**File Size:** `{}`\n\n📥 **Download Link:** `{}`"
         await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**User ID:** `{m.from_user.id}`\n**Download Link:** {stream_link}", disable_web_page_preview=True, parse_mode="Markdown", quote=True)
