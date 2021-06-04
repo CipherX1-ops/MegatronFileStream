@@ -3,7 +3,7 @@ from requests import post
 
 from pyromod import listen 
 from pyrogram import Client, filters
-from pyrogram.types import Message
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
 from Megatron.vars import Var
 from Megatron.bot import StreamBot
@@ -65,6 +65,6 @@ async def nimdownloader(c: Client, m: Message):
             quote=True
         )
     except Exception as e:
-        await StreamBot.send_message(chat.id, f"**ERROR:** `{str(e)}`")
-        #await StreamBot.send_message(chat.id, "**اروری رخ داده است. لطفا بعد 1 دقیقه مجددا امتحان نمایید. در صورت رخداد مجدد مشکل را در چنل پشتیبانی بیان نمایید. با تشکر 🌺**")
+        #await StreamBot.send_message(chat.id, f"**ERROR:** `{str(e)}`")
+        await StreamBot.send_message(chat.id, "**اروری رخ داده است. لطفا بعد 1 دقیقه مجددا امتحان نمایید. در صورت رخداد مجدد مشکل را در چنل پشتیبانی بیان نمایید. با تشکر 🌺**")
         return
