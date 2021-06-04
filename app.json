@@ -12,8 +12,6 @@
       "modular",
       "media"
     ],
-  "repository": "https://github.com/CipherX1-ops/MegatronFileStream",
-  "success_url": "/",
   "logo": "https://telegra.ph/file/6b0f553f80c6522054f78.jpg",
   "env": {
       "ENV": {
