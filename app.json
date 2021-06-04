@@ -31,7 +31,7 @@
           "description": "Get this value from @BotFather"
       },
       "BIN_CHANNEL": {
-          "description": "The BIN Channel ID. Read the readme for more info about this var"
+          "description": "The BIN Channel ID."
       },
       "DATABASE_URL": {
           "description": "MongoDB URI for saving User IDs when they first Start the Bot. We will use that for Broadcasting to them."
@@ -48,28 +48,28 @@
           "required": false
       },
       "SLEEP_THRESHOLD": {
-          "description": "Floodwait Sleep timer. Read the readme for more info about this var",
+          "description": "Floodwait Sleep timer.",
           "required": false
       },
       "WORKERS": {
-          "description": "No. of workers that is to be assigned. Read the readme for more info about this var",
+          "description": "No. of workers that is to be assigned.",
           "required": false
       },
       "PORT": {
-          "description": "Port that you want your webapp to be listened to. Read the readme for more info about this var",
+          "description": "Port that you want your webapp to be listened to.",
           "required": false
       },
       "NO_PORT": {
-          "description": "If you don't want your port to be displayed. Read the readme for more info about this var",
+          "description": "If you don't want your port to be displayed.",
           "value": "False",
           "required": false
       },
       "BIND_ADRESS": {
-          "description": "Read the readme for more info about this var",
+          "description": "Leave blank ",
           "required": false
       },
       "FQDN": {
-          "description": "Read the readme for more info about this var",
+          "description": "Leave blank",
           "required": false
       },
       "SESSION_NAME": {
