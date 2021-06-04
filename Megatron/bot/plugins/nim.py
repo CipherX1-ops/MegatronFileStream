@@ -3,6 +3,7 @@ from requests import post
 
 from pyromod import listen 
 from pyrogram import Client, filters
+from pyrogram.types import Message
 
 from Megatron.vars import Var
 from Megatron.bot import StreamBot
