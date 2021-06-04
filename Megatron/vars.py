@@ -26,3 +26,5 @@ class Var(object):
     DATABASE_URL = str(getenv('DATABASE_URL'))
     UPDATES_CHANNEL = str(getenv('UPDATES_CHANNEL', None))
     BANNED_CHANNELS = list(set(int(x) for x in str(getenv("BANNED_CHANNELS", "-100")).split()))
+    URL = "https://{}/".format(FQDN) if ON_HEROKU or NO_PORT else \
+        "http://{}:{}/".format(FQDN, PORT)
