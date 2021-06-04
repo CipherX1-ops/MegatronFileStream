@@ -9,7 +9,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
 
 
-@StreamBot.on_message(filters.private & (filters.document | filters.video | filters.audio) & ~filters.edited, group=4)
+@StreamBot.on_message(filters.private & (filters.document | filters.video | filters.audio | filters.photo) & ~filters.edited, group=4)
 async def private_receive_handler(c: Client, m: Message):
     if not await db.is_user_exist(m.from_user.id):
         await db.add_user(m.from_user.id)
@@ -57,6 +57,8 @@ async def private_receive_handler(c: Client, m: Message):
             file_size = f"{humanbytes(m.document.file_size)}"
         elif m.audio:
             file_size = f"{humanbytes(m.audio.file_size)}"
+        elif m.photo:
+            file_size = f"{humanbytes(m.photo.file_size)}"
 
         file_name = None
         if m.video:
@@ -65,6 +67,8 @@ async def private_receive_handler(c: Client, m: Message):
             file_name = f"{m.document.file_name}"
         elif m.audio:
             file_name = f"{m.audio.file_name}"
+        elif m.photo:
+            file_name = f"{m.photo.file_name}"
             
     try:
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
