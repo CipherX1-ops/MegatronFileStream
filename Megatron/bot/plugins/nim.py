@@ -58,7 +58,7 @@ async def nimdownloader(c: Client, m: Message):
         request = post(url,data).json()["fileUrl"]
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**User ID:** `{m.from_user.id}`\n**Requested Link:** {txt}\n**Download Link:** {request}", disable_web_page_preview=True, parse_mode="Markdown", quote=True)
-        msg = "لینک نیم بهای شما ایجاد شد 😄\n\n لینک درخواستی شما : [لینک] ⚜️({})\n\nلینک نیم بهای شما : [لینک] ⚜️({})\n\n(c) @FiletoLinkTelegramBot"
+        msg = "لینک نیم بهای شما ایجاد شد 😄\n\⚜️ لینک درخواستی شما : [لینک]({})\n\⚜️ لینک نیم بهای شما : [لینک]({})\n\n✨ @FiletoLinkTelegramBot ✨"
         await m.reply_text(
             text=msg.format(txt, request),
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✵ Download Now ✵", url=request)]]),
