@@ -50,7 +50,7 @@ async def nimdownloader(c: Client, m: Message):
         txt = url.text.strip()
         if txt.startswith("/"):
             continue
-        if "https" in url.text.lower():
+        if "http" in url.text.lower():
             break
     try:
         url = "https://www.digitalbam.ir/DirectLinkDownloader/Download"
