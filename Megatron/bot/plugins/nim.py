@@ -50,6 +50,8 @@ async def nimdownloader(c: Client, m: Message):
         txt = url.text.strip()
         if txt.startswith("/"):
             continue
+        if url.text:
+            break
     try:
         url = "https://www.digitalbam.ir/DirectLinkDownloader/Download"
         data = {"downloadUri":url.text}
