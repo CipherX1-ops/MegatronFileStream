@@ -5,6 +5,7 @@ import secrets
 import mimetypes
 from ..vars import Var
 from aiohttp import web
+from Megatron import StartTime
 from ..bot import StreamBot
 from ..utils.custom_dl import TGCustomYield, chunk_size, offset_fix
 from ..utils.time_format import get_readable_time
