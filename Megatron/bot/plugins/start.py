@@ -99,35 +99,6 @@ async def start(b, m):
                     disable_web_page_preview=True)
                 return
 
-        get_msg = await b.get_messages(chat_id=Var.BIN_CHANNEL, message_ids=int(usr_cmd))
-
-        file_size = None
-        if get_msg.video:
-            file_size = f"{humanbytes(get_msg.video.file_size)}"
-        elif get_msg.document:
-            file_size = f"{humanbytes(get_msg.document.file_size)}"
-        elif get_msg.audio:
-            file_size = f"{humanbytes(get_msg.audio.file_size)}"
-
-        file_name = None
-        if get_msg.video:
-            file_name = f"{get_msg.video.file_name}"
-        elif get_msg.document:
-            file_name = f"{get_msg.document.file_name}"
-        elif get_msg.audio:
-            file_name = f"{get_msg.audio.file_name}"
-
-        log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
-
-        stream_link = Var.URL + str(log_msg.message_id)
-
-        msg_text = "Your Link Generated! 😄\n\nلینک پر سرعت شما ایجاد شد! 😄\n\n📂 **File Name:** `{}`\n**File Size:** `{}`\n\n📥 **Download Link:** `{}`"
-        await m.reply_text(
-            text=msg_text.format(file_name, file_size, stream_link),
-            parse_mode="Markdown",
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✵ Download Now ✵", url=stream_link)]])
-        )
-
 
 @StreamBot.on_message(filters.command('help') & filters.private & ~filters.edited)
 async def help_handler(bot, message):
