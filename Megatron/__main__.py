@@ -17,8 +17,8 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
-logging.getLogger("apscheduler").setLevel(logging.WARNING)
+logging.getLogger("pyrogram").setLevel(logging.ERROR)
+logging.getLogger("apscheduler").setLevel(logging.ERROR)
 
 ppath = "Megatron/bot/plugins/*.py"
 files = glob.glob(ppath)
