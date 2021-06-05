@@ -1,5 +1,6 @@
 apscheduler
 aiohttp
+aiofiles
 motor
 pyrogram
 pyromod
