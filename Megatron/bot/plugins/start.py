@@ -117,10 +117,9 @@ async def start(b, m):
         elif get_msg.audio:
             file_name = f"{get_msg.audio.file_name}"
 
-        stream_link = "https://{}/{}".format(Var.FQDN, get_msg.message_id) if Var.ON_HEROKU or Var.NO_PORT else \
-            "http://{}:{}/{}".format(Var.FQDN,
-                                     Var.PORT,
-                                     get_msg.message_id)
+        log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
+
+        stream_link = Var.URL + str(log_msg.message_id)
 
         msg_text = "Your Link Generated! 😄\n\nلینک پر سرعت شما ایجاد شد! 😄\n\n📂 **File Name:** `{}`\n**File Size:** `{}`\n\n📥 **Download Link:** `{}`"
         await m.reply_text(
