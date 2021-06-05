@@ -68,7 +68,7 @@ async def private_receive_handler(c: Client, m: Message):
         elif m.audio:
             file_name = f"{m.audio.file_name}"
         elif m.photo:
-            file_name = f"{m.photo.file_name}"
+            file_name = f"{m.photo.file_id}"
             
     try:
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
