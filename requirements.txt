@@ -1,8 +1,5 @@
-asyncio
 apscheduler
 aiohttp
-aiofiles
-dnspython
 motor
 pyrogram
 pyromod
