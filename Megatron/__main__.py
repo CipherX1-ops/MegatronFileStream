@@ -11,7 +11,7 @@ from .vars import Var
 from aiohttp import web
 from .server import web_server
 #from .utils.keepalive import ping_server
-from apscheduler.schedulers.background import BackgroundScheduler
+#from apscheduler.schedulers.background import BackgroundScheduler
 
 #logging.basicConfig(
 #    level=logging.INFO,
