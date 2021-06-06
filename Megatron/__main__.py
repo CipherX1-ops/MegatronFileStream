@@ -10,15 +10,15 @@ from .bot import StreamBot
 from .vars import Var
 from aiohttp import web
 from .server import web_server
-from .utils.keepalive import ping_server
+#from .utils.keepalive import ping_server
 from apscheduler.schedulers.background import BackgroundScheduler
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-logging.getLogger("pyrogram").setLevel(logging.ERROR)
-logging.getLogger("apscheduler").setLevel(logging.ERROR)
+#logging.basicConfig(
+#    level=logging.INFO,
+#    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+#)
+#logging.getLogger("pyrogram").setLevel(logging.ERROR)
+#logging.getLogger("apscheduler").setLevel(logging.ERROR)
 
 ppath = "Megatron/bot/plugins/*.py"
 files = glob.glob(ppath)
@@ -44,12 +44,12 @@ async def start_services():
             spec.loader.exec_module(load)
             sys.modules["Megatron.bot.plugins." + plugin_name] = load
             print("Imported => " + plugin_name)
-    if Var.ON_HEROKU:
-        print('------------------ Starting Keep Alive Service ------------------')
-        print('\n')
-        scheduler = BackgroundScheduler()
-        scheduler.add_job(ping_server, "interval", seconds=1200)
-        scheduler.start()
+#    if Var.ON_HEROKU:
+#        print('------------------ Starting Keep Alive Service ------------------')
+#        print('\n')
+#        scheduler = BackgroundScheduler()
+#        scheduler.add_job(ping_server, "interval", seconds=1200)
+#        scheduler.start()
     print('-------------------- Initalizing Web Server --------------------')
     app = web.AppRunner(await web_server())
     await app.setup()
@@ -69,4 +69,4 @@ if __name__ == '__main__':
     try:
         loop.run_until_complete(start_services())
     except KeyboardInterrupt:
-        logging.info('----------------------- Service Stopped -----------------------')
+        print('----------------------- Service Stopped -----------------------')
