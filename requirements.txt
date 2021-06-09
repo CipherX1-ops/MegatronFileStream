@@ -7,4 +7,3 @@ pyromod
 python-dotenv
 requests
 tgcrypto
-cowpy==1.0.3
