@@ -3,7 +3,7 @@ from Megatron.bot import StreamBot
 from Megatron.utils.database import Database
 from Megatron.utils.human_readable import humanbytes
 from Megatron.vars import Var
-from pyrogram import filters, Client
+from pyrogram import filters
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
