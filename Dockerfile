@@ -1,26 +1,21 @@
-FROM kalilinux/kali-rolling
-ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt upgrade -y && apt-get install sudo -y
+FROM python:3.9.5-buster
 
-RUN apt-get install -y\
-    coreutils \
-    apt-utils \
-    bash \
-    wget \
-    python3 \
-    python3-dev \
-    python3-pip
+WORKDIR /Megatron
+RUN chmod 777 /Megatron
+RUN apt-get update -y
+RUN apt-get install -y wget curl bash git 
 
-RUN apt-get autoremove --purge
-RUN pip3 install --upgrade pip
-RUN if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi 
-RUN if [ ! -e /usr/bin/python ]; then ln -sf /usr/bin/python3 /usr/bin/python; fi 
-RUN rm -r /root/.cache
+#Updating Libraries
+RUN pip3 install -U pip
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir -U -r requirements.txt
 
-RUN git clone https://github.com/CipherX1-ops/MegatronFileStream /root/Megatron
-RUN mkdir /root/Megatron/bin/
-WORKDIR /root/Megatron/
-RUN chmod +x /usr/local/bin/*
-RUN pip3 install -r requirements.txt
-CMD ["bash","start.sh"]
+# If u want to use /update feature, uncomment the following and edit
+#RUN git config --global user.email "your_email"
+#RUN git config --global user.name "git_username"
 
+#Copying All Source
+COPY . .
+
+#Starting Bot
+CMD ["python3", "-m", "Megatron"]
