@@ -2,6 +2,7 @@ aiohttp
 apscheduler
 aiofiles
 dnspython
+jprq
 motor
 pyrogram
 pyromod
