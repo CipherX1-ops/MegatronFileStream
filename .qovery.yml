@@ -1,0 +1,11 @@
+---
+application:
+  name: "megatronfilestreambot"
+  project: "megatronfilestream"
+  organization: "QoveryCommunity"
+routers:
+- name: "main-megatronfilestreambot"
+  routes:
+  - application_name: "megatronfilestreambot"
+    paths:
+    - "/*"
