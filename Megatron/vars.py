@@ -12,10 +12,10 @@ class Var(object):
     SLEEP_THRESHOLD = int(getenv('SLEEP_THRESHOLD', '60'))
     WORKERS = int(getenv('WORKERS', '4'))
     BIN_CHANNEL = int(getenv('BIN_CHANNEL'))
-    PORT = int(getenv('PORT', 8080))
+    PORT = int(getenv('PORT', 8000))
     BIND_ADRESS = str(getenv('WEB_SERVER_BIND_ADDRESS', '127.0.0.1'))
     OWNER_ID = int(getenv('OWNER_ID'))
-    NO_PORT = bool(getenv('NO_PORT', False))
+    NO_PORT = bool(getenv('NO_PORT', True))
     APP_NAME = None
     if 'DYNO' in environ:
         ON_HEROKU = True
