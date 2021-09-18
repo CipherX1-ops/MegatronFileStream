@@ -15,7 +15,7 @@ class Var(object):
     PORT = int(getenv('PORT', 8000))
     BIND_ADRESS = str(getenv('WEB_SERVER_BIND_ADDRESS', '127.0.0.1'))
     OWNER_ID = int(getenv('OWNER_ID'))
-    NO_PORT = bool(getenv('NO_PORT', True))
+    NO_PORT = bool(getenv('NO_PORT', False))
     APP_NAME = None
     if 'DYNO' in environ:
         ON_HEROKU = True
@@ -26,5 +26,5 @@ class Var(object):
     UPDATES_CHANNEL = str(getenv('UPDATES_CHANNEL'))
     BANNED_CHANNELS = list(set(int(x) for x in str(getenv("BANNED_CHANNELS", "-100")).split()))
     FQDN = str(getenv('FQDN', BIND_ADRESS)) if not ON_HEROKU or getenv('FQDN') else APP_NAME+'.herokuapp.com'
-    URL = "https://{}/".format(FQDN) if ON_HEROKU or NO_PORT else \
+    URL = "https://{}/".format(FQDN) if ON_HEROKU or PORT == 443 else \
         "http://{}:{}/".format(FQDN, PORT)
