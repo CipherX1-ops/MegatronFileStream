@@ -3,11 +3,25 @@ from Megatron.bot import StreamBot
 from Megatron.utils.database import Database
 from Megatron.utils.human_readable import humanbytes
 from Megatron.vars import Var
+from urllib.parse import quote_plus
+from pyrogram.types.messages_and_media import message
 from pyrogram import filters, Client
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
 
+
+def detect_type(m: Message):
+    if m.document:
+        return m.document
+    elif m.video:
+        return m.video
+    elif m.photo:
+        return m.photo
+    elif m.audio:
+        return m.audio
+    else:
+        return
 
 @StreamBot.on_message(filters.private & (filters.document | filters.video | filters.audio | filters.photo) & ~filters.edited, group=4)
 async def private_receive_handler(c: Client, m: Message):
@@ -71,8 +85,12 @@ async def private_receive_handler(c: Client, m: Message):
             file_name = f"{m.photo.file_id}"
             
     try:
+        file = detect_type(m)
+        file_name = ''
+        if file:
+            file_name = file.file_name
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
-        stream_link = Var.URL + str(log_msg.message_id)
+        stream_link = Var.URL + str(log_msg.message_id) + '/' +quote_plus(file_name) if file_name else ''
         msg_text = "Your Link Generated! 😄\n\nلینک پر سرعت شما ایجاد شد! \n\n📂 **File Name:** `{}`\n**File Size:** `{}`\n\n📥 **Download Link:** `{}`"
         await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**User ID:** `{m.from_user.id}`\n**Download Link:** {stream_link}", disable_web_page_preview=True, parse_mode="Markdown", quote=True)
         await m.reply_text(
