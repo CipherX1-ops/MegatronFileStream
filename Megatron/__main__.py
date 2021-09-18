@@ -6,6 +6,7 @@ import logging
 import importlib
 from pathlib import Path
 from pyrogram import idle
+from . import bot_info
 from .bot import StreamBot
 from .vars import Var
 from aiohttp import web
@@ -28,9 +29,6 @@ loop = asyncio.get_event_loop()
 
 
 async def start_services():
-    print('\n')
-    print('------------------- Initalizing Telegram Bot -------------------')
-    await StreamBot.start()
     print('----------------------------- DONE -----------------------------')
     print('\n')
     print('--------------------------- Importing ---------------------------')
@@ -59,8 +57,10 @@ async def start_services():
     print('----------------------------- DONE -----------------------------')
     print('\n')
     print('----------------------- Service Started -----------------------')
-    print('                        bot =>> {}'.format((await StreamBot.get_me()).first_name))
-    print('                        server ip =>> {}:{}'.format(bind_address, Var.PORT))
+    print('                        bot =>> {}'.format(bot_info.first_name))
+    if bot_info.dc_id:
+        print('                        DC ID =>> {}'.format(str(bot_info.dc_id)))
+    print('                        server ip =>> {}'.format(bind_address, Var.PORT))
     if Var.ON_HEROKU:
         print('                        app runnng on =>> {}'.format(Var.FQDN))
     print('---------------------------------------------------------------')
