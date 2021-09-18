@@ -19,6 +19,7 @@ logging.basicConfig(
 )
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 logging.getLogger("apscheduler").setLevel(logging.ERROR)
+logging.getLogger("aiohttp").setLevel(logging.ERROR)
 
 ppath = "Megatron/bot/plugins/*.py"
 files = glob.glob(ppath)
