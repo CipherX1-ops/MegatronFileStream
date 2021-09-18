@@ -1,3 +1,4 @@
+import re
 import time
 import math
 import logging
@@ -5,7 +6,7 @@ import secrets
 import mimetypes
 from ..vars import Var
 from aiohttp import web
-from Megatron import StartTime
+from Megatron import StartTime, __version__
 from ..bot import StreamBot
 from ..utils.custom_dl import TGCustomYield, chunk_size, offset_fix
 from ..utils.time_format import get_readable_time
@@ -21,20 +22,23 @@ routes = web.RouteTableDef()
 #                              "telegram_bot": '@'+bot_details.username})
 @routes.get("/", allow_head=True)
 async def root_route_handler(request):
-    return web.json_response({"status": "running",
+    return web.json_response({"server_status": "running",
                               "uptime": get_readable_time(time.time() - StartTime),
-                              "telegram_bot": '@'+(await StreamBot.get_me()).username})
+                              "telegram_bot": '@'+(await StreamBot.get_me()).username,
+                              "version": __version__})
 
 
-@routes.get("/{message_id}")
+@routes.get(r"/{message_id:\S+}")
 async def stream_handler(request):
     try:
-        message_id = int(request.match_info['message_id'])
+        message_id = request.match_info['message_id']
+        message_id = int(re.search(r'(\d+)(?:\/\S+)?', message_id).group(1))
         return await media_streamer(request, message_id)
     except ValueError as e:
         logging.error(e)
         raise web.HTTPNotFound
-
+    except AttributeError:
+        pass
 
 async def media_streamer(request, message_id: int):
     range_header = request.headers.get('Range', 0)
