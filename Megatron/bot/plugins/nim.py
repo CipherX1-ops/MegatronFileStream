@@ -63,7 +63,7 @@ async def nimdownloader(c: Client, m: Message):
         link3 = requests["dl3"] 
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**User ID:** `{m.from_user.id}`\n**Requested Link:** {txt}\n**Download Links:**\n✨ {link1}\n✨ {link2}\n✨ {link3}", disable_web_page_preview=True, parse_mode="Markdown", quote=True)
-        msg = "لینک نیم بهای شما ایجاد شد 😄\n\n⚜️ لینک درخواستی شما : [لینک]({})\n\n⚜️ **لینک های نیم بهای شما :**\n✨ سرور اول : [لینک]({})\n✨ سرور دوم : [لینک]({})\n✨ سرور سوم : [لینک]({})\n\n✨ @FiletoLinkTelegramBot ✨"
+        msg = "لینک نیم بهای شما ایجاد شد** 😄**\n\n⚜️ لینک درخواستی شما** : [لینک]**({})\n\n⚜️ **لینک های نیم بهای شما :**\n✨ سرور اول : [لینک]({})\n✨ سرور دوم : [لینک]({})\n✨ سرور سوم : [لینک]({})\n\n✨ @FiletoLinkTelegramBot ✨"
         await m.reply_text(
             text=msg.format(txt, link1, link2, link3),
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✵ Server 1 ✵", url=link1)], [InlineKeyboardButton("✵ Server 2 ✵", url=link2)], [InlineKeyboardButton("✵ Server 3 ✵", url=link3)]]),
