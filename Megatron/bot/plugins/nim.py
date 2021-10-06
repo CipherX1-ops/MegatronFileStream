@@ -66,7 +66,7 @@ async def nimdownloader(c: Client, m: Message):
         msg = "**لینک نیم بهای شما ایجاد شد 😄**\n\n⚜️ **لینک درخواستی شما** : [لینک]({})\n\n⚜️ **لینک های نیم بهای شما :**\n✨ سرور اول : [لینک]({})\n✨ سرور دوم : [لینک]({})\n\n✨ @FiletoLinkTelegramBot ✨"
         await m.reply_text(
             text=msg.format(txt, link1, link2),
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✵ Server 1 ✵", url=link1)], [InlineKeyboardButton("✵ Server 2 ✵", url=link2)], [InlineKeyboardButton("✵ Server 3 ✵", url=link3)]]),
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✵ Server 1 ✵", url=link1)], [InlineKeyboardButton("✵ Server 2 ✵", url=link2)]]),
             quote=True
         )
     except Exception as e:
