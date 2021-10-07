@@ -85,19 +85,22 @@ async def private_receive_handler(c: Client, m: Message):
             file_name = f"{m.photo.file_id}"
             
     try:
-        file = detect_type(m)
-        file_name = ''
-        if file:
-            file_name = file.file_name
-        log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
-        stream_link = Var.URL + str(log_msg.message_id) + '/' +quote_plus(file_name) if file_name else ''
-        msg_text = "Your Link Generated! 😄\n\nلینک پر سرعت شما ایجاد شد! \n\n📂 **File Name:** `{}`\n**File Size:** `{}`\n\n📥 **Download Link:** `{}`"
-        await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**User ID:** `{m.from_user.id}`\n**Download Link:** {stream_link}", disable_web_page_preview=True, parse_mode="Markdown", quote=True)
-        await m.reply_text(
-            text=msg_text.format(file_name, file_size, stream_link),
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Download Now", url=stream_link)]]),
-            quote=True
-        )
+        if file_size > 1.01 GiB:
+            await c.send_message(m.chat.id, "⚜️ Files with size more than 1GiB need premium subscription. For purchasing premium subscription contact @CipherXBot.\n\n⚜️ امکان دریافت لینک فایل هایی با حجم بیشتر از 1 گیگ فقط برای کاربران پریمیوم امکان پذیر است. جهت خرید اشتراک پریمیوم و برداشته شدن محدودیت ها به @CipherXBot پیام دهید.")
+        else:
+            file = detect_type(m)
+            file_name = ''
+            if file:
+                file_name = file.file_name
+            log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
+            stream_link = Var.URL + str(log_msg.message_id) + '/' +quote_plus(file_name) if file_name else ''
+            msg_text = "Your Link Generated! 😄\n\nلینک پر سرعت شما ایجاد شد! \n\n📂 **File Name:** `{}`\n**File Size:** `{}`\n\n📥 **Download Link:** `{}`"
+            await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**User ID:** `{m.from_user.id}`\n**Download Link:** {stream_link}", disable_web_page_preview=True, parse_mode="Markdown", quote=True)
+            await m.reply_text(
+                text=msg_text.format(file_name, file_size, stream_link),
+                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Download Now", url=stream_link)]]),
+                quote=True
+            )
     except FloodWait as e:
         print(f"Sleeping for {str(e.x)}s")
         await asyncio.sleep(e.x)
