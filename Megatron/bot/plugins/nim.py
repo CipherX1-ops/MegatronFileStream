@@ -53,20 +53,20 @@ async def nimdownloader(c: Client, m: Message):
         if "http" in url.text.lower():
             break
     try:
-        #url = "https://www.digitalbam.ir/DirectLinkDownloader/Download"
-        #data = {"downloadUri":txt}
-        #request = post(url,data).json()["fileUrl"]
-        url = f"https://rimon.ir/api/?url={txt}"
-        requests = post(url).json()
-        link1 = requests["dl1"] 
-        link2 = requests["dl2"] 
+        url = "https://www.digitalbam.ir/DirectLinkDownloader/Download"
+        data = {"downloadUri":txt}
+        request = post(url,data).json()["fileUrl"]
+        #url = f"https://rimon.ir/api/?url={txt}"
+        #requests = post(url).json()
+        #link1 = requests["dl1"] 
+        #link2 = requests["dl2"] 
         #link3 = requests["dl3"] 
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
-        await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**User ID:** `{m.from_user.id}`\n**Requested Link:** {txt}\n**Download Links:**\n✨ {link1}\n✨ {link2}", disable_web_page_preview=True, parse_mode="Markdown", quote=True)
-        msg = "**لینک نیم بهای شما ایجاد شد 😄**\n\n⚜️ **لینک درخواستی شما** : [لینک]({})\n\n⚜️ **لینک های نیم بهای شما :**\n✨ سرور اول : [لینک]({})\n✨ سرور دوم : [لینک]({})\n\n✨ @FiletoLinkTelegramBot ✨"
+        await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**User ID:** `{m.from_user.id}`\n**Requested Link:** {txt}\n**Download Link:**\n✨ {request}", disable_web_page_preview=True, parse_mode="Markdown", quote=True)
+        msg = "**لینک نیم بهای شما ایجاد شد 😄**\n\n⚜️ **لینک درخواستی شما** : [لینک]({})\n\n⚜️ **لینک نیم بهای شما :**\n✨ سرور نیم بها : [لینک]({})\n\n✨ @FiletoLinkTelegramBot ✨"
         await m.reply_text(
-            text=msg.format(txt, link1, link2),
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✵ Server 1 ✵", url=link1)], [InlineKeyboardButton("✵ Server 2 ✵", url=link2)]]),
+            text=msg.format(txt, request),
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✵ Download Now ✵", url=request)]]),
             quote=True
         )
     except Exception as e:
