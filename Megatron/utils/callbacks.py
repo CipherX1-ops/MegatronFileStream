@@ -5,7 +5,6 @@ from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant, Messa
 from Megatron.bot import StreamBot
 from Megatron.vars import Var
 
-
 @StreamBot.on_callback_query()
 async def button(bot, cmd: CallbackQuery):
     cb_data = cmd.data
@@ -66,4 +65,3 @@ async def button(bot, cmd: CallbackQuery):
 	    await cmd.answer("User Banned from Updates Channel", show_alert=True)
 	except Exception as e:
 	    await cmd.answer(f"Can't Ban Him!\n\nError: {e}", show_alert=True)
-    
