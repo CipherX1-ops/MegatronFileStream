@@ -1,15 +1,17 @@
 import asyncio
-from Megatron.bot import StreamBot
-from Megatron.utils.database import Database
-from Megatron.utils.human_readable import humanbytes
-from Megatron.vars import Var
 from urllib.parse import quote_plus
+
 from pyrogram.types.messages_and_media import message
 from pyrogram import filters, Client
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
 
+from Megatron.bot import StreamBot
+from Megatron.utils.database import Database
+from Megatron.utils.human_readable import humanbytes
+from Megatron.vars import Var 
+
+db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
 
 def detect_type(m: Message):
     if m.document:
@@ -31,39 +33,10 @@ async def private_receive_handler(c: Client, m: Message):
             Var.BIN_CHANNEL,
             f"#NEW_USER: \n\nNew User [{m.from_user.first_name}](tg://user?id={m.from_user.id}) Started the bot."
         )
-    if Var.UPDATES_CHANNEL is not None:
-        try:
-            user = await c.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
-            if user.status == "kicked":
-                await c.send_message(
-                    chat_id=m.chat.id,
-                    text="Sorry, You are Banned to use me. Contact my [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8).",
-                    parse_mode="markdown",
-                    disable_web_page_preview=True
-                )
-                return
-        except UserNotParticipant:
-            await c.send_message(
-                chat_id=m.chat.id,
-                text="**Please join updates channel to use me**\nOnly channel subscribers can use the bot\nAfter joining tap help button\n\n✨لطفا در چنل عضو شوید. تنها اعضای چنل می توانند از بات استفاده کنند.\nپس از عضویت بر روی /help کلیک کنید.",
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton("✵ Join Updates Channel ✵", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
-                        ]
-                    ]
-                ),
-                parse_mode="markdown"
-            )
+    if Var.UPDATES_CHANNEL:
+        fsub = await force_subscribe(b, m)
+        if fsub == 400:
             return
-        except Exception:
-            await c.send_message(
-                chat_id=m.chat.id,
-                text="Something went Wrong. Contact my [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8).",
-                parse_mode="markdown",
-                disable_web_page_preview=True)
-            return
-
         file_size = None
         if m.video:
             file_size = f"{humanbytes(m.video.file_size)}"
@@ -133,4 +106,3 @@ async def channel_receive_handler(bot, broadcast):
                              disable_web_page_preview=True, parse_mode="Markdown")
     except Exception as e:
         await bot.send_message(chat_id=Var.BIN_CHANNEL, text=f"#ERROR_TRACEBACK: `{e}`", disable_web_page_preview=True, parse_mode="Markdown")
-        print(f"Can't Edit Broadcast Message!\nError: {e}")
