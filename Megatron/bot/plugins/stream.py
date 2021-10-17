@@ -9,6 +9,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from Megatron.bot import StreamBot
 from Megatron.utils.database import Database
 from Megatron.utils.human_readable import humanbytes
+from Megatron.handlers.fsub import force_subscribe
 from Megatron.vars import Var 
 
 db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
