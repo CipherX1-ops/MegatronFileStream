@@ -4,6 +4,7 @@ from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from Megatron.vars import Var
+from Megatron.utils.callbacks import *
 
 async def force_subscribe(bot, cmd):
     try:
