@@ -35,7 +35,7 @@ async def private_receive_handler(c: Client, m: Message):
             f"#NEW_USER: \n\nNew User [{m.from_user.first_name}](tg://user?id={m.from_user.id}) Started the bot."
         )
     if Var.UPDATES_CHANNEL:
-        fsub = await force_subscribe(b, m)
+        fsub = await force_subscribe(bot, cmd)
         if fsub == 400:
             return
         file_size = None
