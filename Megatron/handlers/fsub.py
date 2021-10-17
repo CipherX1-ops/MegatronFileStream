@@ -25,7 +25,7 @@ async def force_subscribe(bot, cmd):
     except UserNotParticipant:
         await bot.send_message(
             chat_id=cmd.from_user.id,
-            text=**✨ Please join updates channel to use me. Only channel subscribers can use the bot.**\n\nAfter joining tap refresh button.\n\n**✨لطفا در چنل عضو شوید. تنها اعضای چنل می توانند از بات استفاده کنند.**\n\nپس از عضویت بر روی دکمه refresh کلیک کنید.",
+            text="**✨ Please join updates channel to use me. Only channel subscribers can use the bot.**\n\nAfter joining tap refresh button.\n\n**✨لطفا در چنل عضو شوید. تنها اعضای چنل می توانند از بات استفاده کنند.**\n\nپس از عضویت بر روی دکمه refresh کلیک کنید.",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
