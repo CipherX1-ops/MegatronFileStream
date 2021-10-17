@@ -23,7 +23,7 @@ async def start(b, m : Message):
     usr_cmd = m.text.split("_")[-1]
     if usr_cmd == "/start":
         if Var.UPDATES_CHANNEL:
-            fsub = await force_subscribe(bot, cmd)
+            fsub = await force_subscribe(b, m)
             if fsub == 400:
                 return
         await m.reply(
@@ -38,7 +38,7 @@ async def start(b, m : Message):
         )
     else:
         if Var.UPDATES_CHANNEL:
-            fsub = await force_subscribe(bot, cmd)
+            fsub = await force_subscribe(b, m)
             if fsub == 400:
                 return
 
@@ -51,7 +51,7 @@ async def help_handler(bot, message):
             f"#NEW_USER: \n\nNew User [{message.from_user.first_name}](tg://user?id={message.from_user.id}) Started !!"
         )
     if Var.UPDATES_CHANNEL:
-        fsub = await force_subscribe(bot, cmd)
+        fsub = await force_subscribe(b, m)
         if fsub == 400:
             return
     await message.reply_text(
