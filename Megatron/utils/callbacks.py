@@ -20,29 +20,29 @@ async def button(bot, cmd: CallbackQuery):
             disable_web_page_preview=True
           )
           return
-        except UserNotParticipant:
-          await cmd.message.edit(
-            text="**✨ You still haven't joined the updates channel. Only channel subscribers can use the bot.**\n\nAfter joining tap refresh button.\n\n**✨شما هنوز عضو چنل نشدید. تنها اعضای چنل می توانند از بات استفاده کنند.**\n\nپس از عضویت بر روی دکمه refresh کلیک کنید.",
-            reply_markup=InlineKeyboardMarkup(
+      except UserNotParticipant:
+        await cmd.message.edit(
+          text="**✨ You still haven't joined the updates channel. Only channel subscribers can use the bot.**\n\nAfter joining tap refresh button.\n\n**✨شما هنوز عضو چنل نشدید. تنها اعضای چنل می توانند از بات استفاده کنند.**\n\nپس از عضویت بر روی دکمه refresh کلیک کنید.",
+          reply_markup=InlineKeyboardMarkup(
+            [
               [
-                [
-                  InlineKeyboardButton("✵ Join Updates Channel ✵", url=invite_link.invite_link)
-                ],
-                [
-                  InlineKeyboardButton("🔄 Refresh 🔄", callback_data="refreshmeh")
-                ]
+                InlineKeyboardButton("✵ Join Updates Channel ✵", url=invite_link.invite_link)
+              ],
+              [
+                InlineKeyboardButton("🔄 Refresh 🔄", callback_data="refreshmeh")
               ]
-            ),
-            parse_mode="markdown"
-          )
-          return
-        except Exception:
-          await cmd.message.edit(
-            text="Something went Wrong. Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8).",
-            parse_mode="markdown",
-            disable_web_page_preview=True
-          )
-          return
+            ]
+          ),
+          parse_mode="markdown"
+        )
+        return
+      except Exception:
+        await cmd.message.edit(
+          text="Something went Wrong. Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8).",
+          parse_mode="markdown",
+          disable_web_page_preview=True
+        )
+        return
     await cmd.message.edit(
       text=f"""Hey Dear {cmd.from_user.mention(style="md")} 🙋🏻‍♂️\nI'm Telegram File to Link Generator Bot.\n\nSend me any file & get the fast direct download link!\n\nسلام {cmd.from_user.mention(style="md")} عزیز 🙋🏻‍♂️\nمن بات تبدیل فایل به لینک هستم\nفایل تلگرامی خود را ارسال کنید تا لینک دانلود پر سرعت آن را دریافت نمایید\n\nهمچنین با زدن دستور /nim می‌توانید لینک های دریافتی خود را نیم بها نمایید.""",
       parse_mode="Markdown",
