@@ -13,7 +13,7 @@ async def button(bot, cmd: CallbackQuery):
 	    invite_link = await bot.create_chat_invite_link(int(Config.UPDATES_CHANNEL))
 	    try:
 	        user = await bot.get_chat_member(int(Var.UPDATES_CHANNEL), cmd.message.chat.id)
-		if user.status == "kicked":
+                if user.status == "kicked":
 		    await cmd.message.edit(
                         text="**✨ You are Banned due not to pay attention to the rules. Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8) for further information if interested.\n\n✨ شما به علت عدم رعایت قوانین بن شده اید. جهت اطلاع بیشتر در صورت تمایل می توانید با [گروه پشتیبانی](https://t.me/joinchat/riq-psSksFtiMDU8) در ارتباط باشید.",
 			parse_mode="markdown",
