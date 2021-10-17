@@ -10,7 +10,7 @@ async def button(bot, cmd: CallbackQuery):
   cb_data = cmd.data
   if "refreshmeh" in cb_data:
     if Var.UPDATES_CHANNEL:
-      invite_link = await bot.create_chat_invite_link(int(Config.UPDATES_CHANNEL))
+      invite_link = await bot.create_chat_invite_link(int(Var.UPDATES_CHANNEL))
       try:
         user = await bot.get_chat_member(int(Var.UPDATES_CHANNEL), cmd.message.chat.id)
         if user.status == "kicked":
