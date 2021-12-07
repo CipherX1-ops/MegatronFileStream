@@ -7,7 +7,6 @@ import importlib
 from pathlib import Path
 from pyrogram import idle
 from Megatron import bot_info
-from .bot import StreamBot
 from .vars import Var
 from aiohttp import web
 from .server import web_server
