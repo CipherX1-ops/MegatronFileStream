@@ -8,5 +8,5 @@ print('------------------- Initalizing Telegram Bot -------------------')
 StreamBot.start()
 bot_info = StreamBot.get_me()
 
-__version__ = 1.02
+__version__ = 1.08
 StartTime = time.time()
