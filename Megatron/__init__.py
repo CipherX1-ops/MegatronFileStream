@@ -1,4 +1,5 @@
 import time
+from .vars import Var
 from .bot import StreamBot
 
 print('\n')
