@@ -187,7 +187,7 @@ class TGCustomYield:
                     )
 
                     current_part += 1
-        except TimeoutError:
+        except (TimeoutError or AttributeError):
             ...
 
     async def download_as_bytesio(self, media_msg: Message):
