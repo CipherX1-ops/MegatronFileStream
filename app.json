@@ -68,6 +68,10 @@
           "description": "Leave blank ",
           "required": false
       },
+      "PING_INTERVAL": {
+          "description": "The time in ms you want the servers to be pinged each time to avoid sleeping.",
+          "required": false
+      },
       "FQDN": {
           "description": "Leave blank",
           "required": false
