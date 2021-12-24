@@ -1,7 +1,6 @@
 import asyncio
 from urllib.parse import quote_plus
 
-from pyrogram.types.messages_and_media import message
 from pyrogram import filters, Client
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
@@ -64,7 +63,9 @@ async def private_receive_handler(c: Client, m: Message):
         if file:
             file_name = file.file_name
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
-        stream_link = Var.URL + str(log_msg.message_id) + '/' +quote_plus(file_name) if file_name else ''
+        stream_link = f"{Var.URL}{log_msg.message_id}"
+        if file_name:
+            stream_link += f'/{quote_plus(file_name)}'
         msg_text = "Your Link Generated! 😄\n\nلینک پر سرعت شما ایجاد شد! \n\n📂 **File Name:** `{}`\n**File Size:** `{}`\n\n📥 **Download Link:** `{}`"
         await c.send_message(chat_id=Var.BIN_CHANNEL, text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**User ID:** `{m.from_user.id}`\n**Download Link:** {stream_link}", disable_web_page_preview=True, reply_to_message_id=log_msg.message_id, parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Ban User", callback_data=f"ban_{m.from_user.id}")]])) 
         await m.reply_text(
