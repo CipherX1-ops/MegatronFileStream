@@ -17,14 +17,13 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
-logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
 logging.getLogger("aiohttp").setLevel(logging.ERROR)
-
-ppath = "Megatron/bot/plugins/*.py"
-files = glob.glob(ppath)
+logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
 
 loop = asyncio.get_event_loop()
 
+ppath = "Megatron/bot/plugins/*.py"
+files = glob.glob(ppath)
 
 async def start_services():
     print('----------------------------- DONE -----------------------------')
