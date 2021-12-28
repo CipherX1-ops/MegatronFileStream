@@ -3,7 +3,7 @@ import logging
 import aiohttp
 import traceback
 
-from Megatron import Var 
+from Megatron.vars import Var 
 
 async def ping_server():
     sleep_time = Var.PING_INTERVAL
