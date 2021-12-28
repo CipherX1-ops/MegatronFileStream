@@ -1,7 +1,6 @@
 aiohttp
 aiofiles
 dnspython
-jprq
 motor
 pyrogram
 pyromod
