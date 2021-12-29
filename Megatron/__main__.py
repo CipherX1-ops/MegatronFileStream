@@ -40,10 +40,9 @@ async def start_services():
             spec.loader.exec_module(load)
             sys.modules["Megatron.bot.plugins." + plugin_name] = load
             print("Imported => " + plugin_name)
-    if Var.ON_HEROKU:
-        print('------------------ Starting Keep Alive Service ------------------')
-        print('\n')
-        await asyncio.create_task(ping_server())
+    print('------------------ Starting Keep Alive Service ------------------')
+    print('\n')
+    await asyncio.create_task(ping_server())
     print('-------------------- Initalizing Web Server --------------------')
     app = web.AppRunner(await web_server())
     await app.setup()
