@@ -46,7 +46,7 @@ async def start_services():
     print('------------------ Starting Keep Alive Service ------------------')
     print('\n')
     scheduler = BackgroundScheduler()
-    scheduler.add_job(ping_server, "interval", seconds=Var.PING_INTERVAL)
+    scheduler.add_job(ping_server, seconds=Var.PING_INTERVAL)
     scheduler.start()
     print('-------------------- Initalizing Web Server --------------------')
     app = web.AppRunner(await web_server())
