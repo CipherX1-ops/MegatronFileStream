@@ -5,7 +5,10 @@ import asyncio
 import logging
 import importlib
 from pathlib import Path
-from pyrogram import idle
+from apscheduler.schedulers.background import BackgroundScheduler
+
+from pyrogram import idle 
+
 from Megatron import bot_info
 from .vars import Var
 from aiohttp import web
@@ -18,7 +21,7 @@ logging.basicConfig(
 )
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 logging.getLogger("aiohttp").setLevel(logging.ERROR)
-logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
+logging.getLogger("apscheduler").setLevel(logging.ERROR)
 
 loop = asyncio.get_event_loop()
 
@@ -42,7 +45,9 @@ async def start_services():
             print("Imported => " + plugin_name)
     print('------------------ Starting Keep Alive Service ------------------')
     print('\n')
-    await asyncio.create_task(ping_server())
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(ping_server, "interval", seconds=Var.PING_INTERVAL)
+    scheduler.start()
     print('-------------------- Initalizing Web Server --------------------')
     app = web.AppRunner(await web_server())
     await app.setup()
