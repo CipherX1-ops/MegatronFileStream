@@ -22,7 +22,7 @@ class Var(object):
     OWNER_ID = int(getenv('OWNER_ID'))
     NO_PORT = getenv('NO_PORT', False)
     NO_PORT = True if str(NO_PORT).lower() == 'true' else False
-    APP_NAME = None
+    HEROKU_API_KEY = str(getenv('HEROKU_API_KEY'))
     if 'DYNO' in environ:
         ON_HEROKU = True
         APP_NAME = str(getenv('APP_NAME'))
