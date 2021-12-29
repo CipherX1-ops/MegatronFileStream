@@ -27,4 +27,5 @@ async def ping_server():
                             logging.warning(f"Failed to restart the app because of this error : {str(e)}") 
                     else:
                         logging.warning("Failed to ping the server...!")
-
+        except Exception:
+            traceback.print_exc()
