@@ -1,12 +1,11 @@
 import time
 from .vars import Var
-from .bot import StreamBot
+from Megatron.bot.clients import StreamBot
 
-print('\n')
-print('------------------- Initalizing Telegram Bot -------------------')
+print("\n")
+print("------------------- Initializing Telegram Bot -------------------")
 
 StreamBot.start()
 bot_info = StreamBot.get_me()
-
-__version__ = 1.08
+__version__ = 2.2
 StartTime = time.time()
