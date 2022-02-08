@@ -77,7 +77,7 @@ async def media_receive_handler(c: Client, m: Message):
         if file:
             file_name = file.file_name
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
-        stream_link = f"{Var.URL}{log_msg.message_id}?hash={get_hash(log_msg)}/{quote_plus(get_name(m))}"
+        stream_link = f"{Var.URL}{log_msg.message_id}{get_hash(log_msg)}/{quote_plus(get_name(m))}"
         short_link = f"{Var.URL}{get_hash(log_msg)}{log_msg.message_id}"
         logging.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
         msg_text = f"Your Link Generated! 😄\n\nلینک پر سرعت شما ایجاد شد! 😄\n\n📂 **File Name:** `{file_name}`\n**✨ File Size:** `{file_size}`\n\n📥 **Download Link:** `{stream_link}`\n📥 **Short Link:** `{short_link}`"
