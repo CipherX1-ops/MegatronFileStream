@@ -44,11 +44,16 @@ async def media_receive_handler(c: Client, m: Message):
         stream_link = f"{Var.URL}{log_msg.message_id}/{quote_plus(get_name(m))}?hash={get_hash(log_msg)}"
         short_link = f"{Var.URL}{get_hash(log_msg)}{log_msg.message_id}"
         logging.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
-        msg_text = "Your Link Generated! 😄\n\nلینک پر سرعت شما ایجاد شد! 😄\n\n📂 **File Name:** `{}`\n**✨ File Size:** `{}`\n\n📥 **Download Link:** `{}`\n📥 **Short Link:** `{}`"
+        msg_text = f"Your Link Generated! 😄\n\nلینک پر سرعت شما ایجاد شد! 😄\n\n📂 **File Name:** `{file_name}`\n**✨ File Size:** `{file_size}`\n\n📥 **Download Link:** `{stream_link}`\n📥 **Short Link:** `{short_link}`"
         await c.send_message(chat_id=Var.BIN_CHANNEL, text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**User ID:** `{m.from_user.id}`\n**Download Link:** {stream_link}\n**Short Link:** {short_link}", disable_web_page_preview=True, reply_to_message_id=log_msg.message_id, parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Ban User", callback_data=f"ban_{m.from_user.id}")]])) 
         await m.reply_text(
-            text=msg_text.format(file_name, file_size, stream_link, short_link),
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Download Now", url=stream_link)],[InlineKeyboardButton("Short Link", url=short_link)],]),
+            text=msg_text, 
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [InlineKeyboardButton("Download Now", url=stream_link)],
+                    [InlineKeyboardButton("Short Link", url=short_link)],
+                ],
+            ),
             quote=True
         )
     except FloodWait as e:
