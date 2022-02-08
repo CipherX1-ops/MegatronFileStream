@@ -14,18 +14,6 @@ from Megatron.vars import Var
 
 db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
 
-def detect_type(m: Message):
-    if m.document:
-        return m.document
-    elif m.video:
-        return m.video
-    elif m.photo:
-        return m.photo
-    elif m.audio:
-        return m.audio
-    else:
-        return
-
 @StreamBot.on_message(
     filters.private
     & (
