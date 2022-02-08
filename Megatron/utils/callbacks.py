@@ -60,7 +60,7 @@ async def button(bot, cmd: CallbackQuery):
       return
     try:
       user_id = cb_data.split("_", 1)[1]
-      await bot.kick_chat_member(chat_id=Var.UPDATES_CHANNEL, user_id=int(user_id))
+      await bot.ban_chat_member(chat_id=Var.UPDATES_CHANNEL, user_id=int(user_id))
       await cmd.answer("User Banned from Updates Channel", show_alert=True)
     except Exception as e:
       await cmd.answer(f"Can't Ban Him!\n\nError: {e}", show_alert=True)
