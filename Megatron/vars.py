@@ -8,6 +8,7 @@ class Var(object):
     MULTI_CLIENT = False
     API_ID = int(environ.get("API_ID"))
     API_HASH = str(environ.get("API_HASH"))
+    SESSION_NAME = str(environ.get('SESSION_NAME', 'Megatron'))
     BOT_TOKEN = str(environ.get("BOT_TOKEN"))
     BROADCAST_AS_COPY = bool(environ.get("BROADCAST_AS_COPY", False))
     SLEEP_THRESHOLD = int(environ.get("SLEEP_THRESHOLD", "60"))  # 1 minte
