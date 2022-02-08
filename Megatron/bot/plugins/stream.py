@@ -48,7 +48,7 @@ async def media_receive_handler(c: Client, m: Message):
         await c.send_message(chat_id=Var.BIN_CHANNEL, text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**User ID:** `{m.from_user.id}`\n**Download Link:** {stream_link}\n**Short Link:** {short_link}", disable_web_page_preview=True, reply_to_message_id=log_msg.message_id, parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Ban User", callback_data=f"ban_{m.from_user.id}")]])) 
         await m.reply_text(
             text=msg_text.format(file_name, file_size, stream_link, short_link),
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Download Now", url=stream_link)],[InlineKeyboardButton("Short Link", url=short_link)]]),
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Download Now", url=stream_link)],[InlineKeyboardButton("Short Link", url=short_link)],]),
             quote=True
         )
     except FloodWait as e:
