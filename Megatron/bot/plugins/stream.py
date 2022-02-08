@@ -54,7 +54,8 @@ async def media_receive_handler(c: Client, m: Message):
                     [InlineKeyboardButton("Short Link", url=short_link)],
                 ],
             ),
-            quote=True
+            quote=True, 
+            parse_mode="Markdown"
         )
     except FloodWait as e:
         print(f"Sleeping for {str(e.x)}s")
