@@ -11,8 +11,22 @@ from Megatron.utils import get_hash, get_name
 from Megatron.utils.database import Database
 from Megatron.handlers.fsub import force_subscribe
 from Megatron.vars import Var 
+from Megatron.utils.human_readable import humanbytes
 
 db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
+
+
+def detect_type(m: Message):
+    if m.document:
+        return m.document
+    elif m.video:
+        return m.video
+    elif m.photo:
+        return m.photo
+    elif m.audio:
+        return m.audio
+    else:
+        return
 
 @StreamBot.on_message(
     filters.private
@@ -40,6 +54,28 @@ async def media_receive_handler(c: Client, m: Message):
         if fsub == 400:
             return    
     try:
+        file_size = None
+        if m.video:
+            file_size = f"{humanbytes(m.video.file_size)}"
+        elif m.document:
+            file_size = f"{humanbytes(m.document.file_size)}"
+        elif m.audio:
+            file_size = f"{humanbytes(m.audio.file_size)}"
+        elif m.photo:
+            file_size = f"{humanbytes(m.photo.file_size)}"
+        file_name = None
+        if m.video:
+            file_name = f"{m.video.file_name}"
+        elif m.document:
+            file_name = f"{m.document.file_name}"
+        elif m.audio:
+            file_name = f"{m.audio.file_name}"
+        elif m.photo:
+            file_name = f"{m.photo.file_id}"
+        file = detect_type(m)
+        file_name = ''
+        if file:
+            file_name = file.file_name
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         stream_link = f"{Var.URL}{log_msg.message_id}/{quote_plus(get_name(m))}?hash={get_hash(log_msg)}"
         short_link = f"{Var.URL}{get_hash(log_msg)}{log_msg.message_id}"
