@@ -41,6 +41,14 @@ async def start(b, m : Message):
             fsub = await force_subscribe(b, m)
             if fsub == 400:
                 return
+        u = await b.get_chat_member(int(Var.UPDATES_CHANNEL), m.from_user.id)
+        if u.status == "kicked" or u.status == "banned":
+            await b.send_message(
+                chat_id=m.from_user.id,
+                text="✨ You're Banned due not to pay attention to the [rules](https://t.me/FutureTechnologyOfficial/1257). Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8) if you think you've banned wrongly.\n\n✨ شما به علت عدم رعایت [قوانین](https://t.me/FutureTechnologyOfficial/1257) بن شده اید. اگر فکر میکنید بن شدن شما اشتباه بوده و قوانین را رعایت کرده اید می توانید با [گروه پشتیبانی](https://t.me/joinchat/riq-psSksFtiMDU8) در ارتباط باشید.",
+                parse_mode="markdown",
+                disable_web_page_preview=True
+            )
 
 @StreamBot.on_message(filters.command('help') & filters.private & ~filters.edited)
 async def help_handler(bot, message):
@@ -54,6 +62,14 @@ async def help_handler(bot, message):
         fsub = await force_subscribe(b, m)
         if fsub == 400:
             return
+    u = await bot.get_chat_member(int(Var.UPDATES_CHANNEL), message.from_user.id)
+    if u.status == "kicked" or u.status == "banned":
+        await bot.send_message(
+            chat_id=message.from_user.id,
+            text="✨ You're Banned due not to pay attention to the [rules](https://t.me/FutureTechnologyOfficial/1257). Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8) if you think you've banned wrongly.\n\n✨ شما به علت عدم رعایت [قوانین](https://t.me/FutureTechnologyOfficial/1257) بن شده اید. اگر فکر میکنید بن شدن شما اشتباه بوده و قوانین را رعایت کرده اید می توانید با [گروه پشتیبانی](https://t.me/joinchat/riq-psSksFtiMDU8) در ارتباط باشید.",
+            parse_mode="markdown",
+            disable_web_page_preview=True
+        )
     await message.reply_text(
         text="✨ Send me any file, I'll give you its direct download link\n\nAlso I'm supported in channels. Add me to channel as admin to make me workable\n\n✨ فایل تلگرامی خود را برای من بفرستید تا لینک دانلود مستقیم آن را برای شما بفرستم\n\nهمچنین با ارتقای من به عنوان ادمین در چنل خود می توانید از امکانات من استفاده کنید، بدین صورت که در زمان پست فایل جدید در چنل دکمه شیشه ای دریافت لینک مستقیم فایل پست شده در زیر پست ایجاد می گردد.",
         parse_mode="Markdown",
