@@ -76,6 +76,14 @@ async def media_receive_handler(c: Client, m: Message):
         file_name = ''
         if file:
             file_name = file.file_name
+        u = await c.get_chat_member(int(Var.UPDATES_CHANNEL), m.from_user.id)
+        if u.status == "kicked" or u.status == "banned":
+            await c.send_message(
+                chat_id=m.from_user.id,
+                text="✨ You're Banned due not to pay attention to the [rules](https://t.me/FutureTechnologyOfficial/1257). Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8) if you think you've banned wrongly.\n\n✨ شما به علت عدم رعایت [قوانین](https://t.me/FutureTechnologyOfficial/1257) بن شده اید. اگر فکر میکنید بن شدن شما اشتباه بوده و قوانین را رعایت کرده اید می توانید با [گروه پشتیبانی](https://t.me/joinchat/riq-psSksFtiMDU8) در ارتباط باشید.",
+                parse_mode="markdown",
+                disable_web_page_preview=True
+            )
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         stream_link = f"{Var.URL}{log_msg.message_id}/{quote_plus(get_name(m))}?hash={get_hash(log_msg)}"
         short_link = f"{Var.URL}{get_hash(log_msg)}{log_msg.message_id}"
@@ -93,15 +101,6 @@ async def media_receive_handler(c: Client, m: Message):
             quote=True, 
             parse_mode="Markdown"
         )
-        else:
-            u = await c.get_chat_member(int(Var.UPDATES_CHANNEL), m.from_user.id)
-            if u.status == "kicked" or u.status == "banned":
-                await c.send_message(
-                    chat_id=m.from_user.id,
-                    text="✨ You're Banned due not to pay attention to the [rules](https://t.me/FutureTechnologyOfficial/1257). Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8) if you think you've banned wrongly.\n\n✨ شما به علت عدم رعایت [قوانین](https://t.me/FutureTechnologyOfficial/1257) بن شده اید. اگر فکر میکنید بن شدن شما اشتباه بوده و قوانین را رعایت کرده اید می توانید با [گروه پشتیبانی](https://t.me/joinchat/riq-psSksFtiMDU8) در ارتباط باشید.",
-                    parse_mode="markdown",
-                    disable_web_page_preview=True
-                )
     except FloodWait as e:
         print(f"Sleeping for {str(e.x)}s")
         await asyncio.sleep(e.x)
