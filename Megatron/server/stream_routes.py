@@ -29,6 +29,8 @@ async def root_route_handler(_):
                 )
             ),
             "version": __version__,
+            "Developed by": "CipherX", 
+            "Channel": "@FutureTechnologyOfficial", 
         }
     )
 
