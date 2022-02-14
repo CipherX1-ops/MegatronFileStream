@@ -22,6 +22,7 @@ class Var(object):
     HAS_SSL = environ.get("HAS_SSL", False)
     HAS_SSL = True if str(HAS_SSL).lower() == "true" else False
     OWNER_ID = int(environ.get('OWNER_ID'))
+    PRO_USERS = list(set(int(x) for x in str(environ.get("PRO_USERS", "")).split()))
     NO_PORT = environ.get("NO_PORT", False)
     NO_PORT = True if str(NO_PORT).lower() == "true" else False
     if "DYNO" in environ:
