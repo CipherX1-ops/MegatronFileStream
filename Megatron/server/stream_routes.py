@@ -18,19 +18,19 @@ routes = web.RouteTableDef()
 async def root_route_handler(_):
     return web.json_response(
         {
-            "✨ Server Status": "running",
-            "✨ Uptime": utils.get_readable_time(time.time() - StartTime),
-            "✨ Telegram Bot": "@" + bot_info.username,
-            "✨ Connected_ Bots": len(multi_clients),
-            "✨ Loads": dict(
+            "⁂ Server Status": "running",
+            "⁂ Uptime": utils.get_readable_time(time.time() - StartTime),
+            "⁂ Telegram Bot": "@" + bot_info.username,
+            "⁂ Connected_ Bots": len(multi_clients),
+            "⁂ Loads": dict(
                 ("bot" + str(c + 1), l)
                 for c, (_, l) in enumerate(
                     sorted(work_loads.items(), key=lambda x: x[1], reverse=True)
                 )
             ),
-            "✨ Version": __version__,
-            "✨ Developed by": "CipherX", 
-            "✨ Channel": "@FutureTechnologyOfficial", 
+            "⁂ Version": __version__,
+            "⁂ Developed by": "CipherX", 
+            "⁂ Channel": "@FutureTechnologyOfficial", 
         }
     )
 
