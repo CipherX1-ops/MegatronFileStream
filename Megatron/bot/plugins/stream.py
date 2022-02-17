@@ -85,11 +85,11 @@ async def media_receive_handler(c: Client, m: Message):
                 parse_mode="markdown",
                 disable_web_page_preview=True
             )
-        y = re.findall("\d+\.\d+", file_size)
-        d = [i for i in y]
+        #y = re.findall("\d+\.\d+", file_size)
+        #d = [i for i in y]
         file = detect_type(m)
         file_name = ''
-        if file and float(d[0])<1:
+        if file and "GiB" in str(file_size):
             await c.send_message(m.chat.id, "⚜️ Files with size more than 1GiB need premium subscription. For purchasing premium subscription contact @CipherXBot.\n\n⚜️ امکان دریافت لینک فایل هایی با حجم بیشتر از 1 گیگ فقط برای کاربران پریمیوم امکان پذیر است. جهت خرید اشتراک پریمیوم و برداشته شدن محدودیت ها به @CipherXBot پیام دهید.")
             is_spam, sleep_time = await check_spam(m.from_user.id)
             if is_spam:
