@@ -91,15 +91,15 @@ async def media_receive_handler(c: Client, m: Message):
         if float(d[0])>1:
             if not m.from_user.id in Var.PRO_USERS:
                 await c.send_message(m.chat.id, "⚜️ Files with size more than 1GiB need premium subscription. For purchasing premium subscription contact @CipherXBot.\n\n⚜️ امکان دریافت لینک فایل هایی با حجم بیشتر از 1 گیگ فقط برای کاربران پریمیوم امکان پذیر است. جهت خرید اشتراک پریمیوم و برداشته شدن محدودیت ها به @CipherXBot پیام دهید.")
-        elif not m.from_user.id in Var.PRO_USERS:
-            is_spam, sleep_time = await check_spam(m.from_user.id)
-            if is_spam:
-                await m.reply_text(f"`⚠️ Don't spam!\n✨ You have to wait for `{str(sleep_time)}` seconds or purchasing premium subscription via contacting @CipherXBot.\n\n⚠️ اسپم نزنید!\n✨ شما باید `{str(sleep_time)}` ثانیه صبر کنید و یا اشتراک پریمیوم از طریق ارتباط با @CipherXBot تهیه نمایید.", quote=True)
-        elif m.from_user.id in Var.PRO_USERS:
-            is_spam, sleep_time = await check_spam(m.from_user.id)
-            if is_spam:
-                await m.reply_text(f"`⚠️ Don't spam premium user\n✨ As you're a premium user you have to wait for `{str(sleep_time)}` seconds. Usual users have to wait for 120 seconds.\n\n⚠️ اسپم نزنید کاربر پریمیوم\n✨ با وجود کاربر پریمیوم بودن، شما باید `{str(sleep_time)}` ثانیه صبر کنید. کاربران عادی 120 ثانیه محدودیت دارند.", quote=True)
         else:
+            if not m.from_user.id in Var.PRO_USERS:
+                is_spam, sleep_time = await check_spam(m.from_user.id)
+                if is_spam:
+                    await m.reply_text(f"`⚠️ Don't spam!\n✨ You have to wait for `{str(sleep_time)}` seconds or purchasing premium subscription via contacting @CipherXBot.\n\n⚠️ اسپم نزنید!\n✨ شما باید `{str(sleep_time)}` ثانیه صبر کنید و یا اشتراک پریمیوم از طریق ارتباط با @CipherXBot تهیه نمایید.", quote=True)
+            elif m.from_user.id in Var.PRO_USERS:
+                is_spam, sleep_time = await check_spam(m.from_user.id)
+                if is_spam:
+                    await m.reply_text(f"`⚠️ Don't spam premium user\n✨ As you're a premium user you have to wait for `{str(sleep_time)}` seconds. Usual users have to wait for 120 seconds.\n\n⚠️ اسپم نزنید کاربر پریمیوم\n✨ با وجود کاربر پریمیوم بودن، شما باید `{str(sleep_time)}` ثانیه صبر کنید. کاربران عادی 120 ثانیه محدودیت دارند.", quote=True)
             file = detect_type(m)
             file_name = ''
             if file:
