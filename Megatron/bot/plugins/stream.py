@@ -55,29 +55,28 @@ async def media_receive_handler(c: Client, m: Message):
         fsub = await force_subscribe(c, m)
         if fsub == 400:
             return    
+
+    file_size = None
+    if m.video:
+        file_size = f"{humanbytes(m.video.file_size)}"
+    elif m.document:
+        file_size = f"{humanbytes(m.document.file_size)}"
+    elif m.audio:
+        file_size = f"{humanbytes(m.audio.file_size)}"
+    elif m.photo:
+        file_size = f"{humanbytes(m.photo.file_size)}"
+
+    file_name = None
+    if m.video:
+        file_name = f"{m.video.file_name}"
+    elif m.document:
+        file_name = f"{m.document.file_name}"
+    elif m.audio:
+        file_name = f"{m.audio.file_name}"
+    elif m.photo:
+        file_name = f"{m.photo.file_id}"
+
     try:
-        file_size = None
-        if m.video:
-            file_size = f"{humanbytes(m.video.file_size)}"
-        elif m.document:
-            file_size = f"{humanbytes(m.document.file_size)}"
-        elif m.audio:
-            file_size = f"{humanbytes(m.audio.file_size)}"
-        elif m.photo:
-            file_size = f"{humanbytes(m.photo.file_size)}"
-        file_name = None
-        if m.video:
-            file_name = f"{m.video.file_name}"
-        elif m.document:
-            file_name = f"{m.document.file_name}"
-        elif m.audio:
-            file_name = f"{m.audio.file_name}"
-        elif m.photo:
-            file_name = f"{m.photo.file_id}"
-        file = detect_type(m)
-        file_name = ''
-        if file:
-            file_name = file.file_name
         u = await c.get_chat_member(int(Var.UPDATES_CHANNEL), m.from_user.id)
         if u.status == "kicked" or u.status == "banned":
             await c.send_message(
@@ -86,9 +85,10 @@ async def media_receive_handler(c: Client, m: Message):
                 parse_mode="markdown",
                 disable_web_page_preview=True
             )
+
         y = re.findall("\d+\.\d+", file_size)
         d = [i for i in y]
-        if float(d[0])>1 and m.from_user.id not in Var.PRO_USERS:
+        if float(d[0])>1 or m.from_user.id not in Var.PRO_USERS:
             await c.send_message(m.chat.id, "⚜️ Files with size more than 1GiB need premium subscription. For purchasing premium subscription contact @CipherXBot.\n\n⚜️ امکان دریافت لینک فایل هایی با حجم بیشتر از 1 گیگ فقط برای کاربران پریمیوم امکان پذیر است. جهت خرید اشتراک پریمیوم و برداشته شدن محدودیت ها به @CipherXBot پیام دهید.")
         else:
             if m.from_user.id not in Var.PRO_USERS:
@@ -100,6 +100,10 @@ async def media_receive_handler(c: Client, m: Message):
                 if is_spam:
                     await m.reply_text(f"`⚠️ Don't spam premium user\n✨ As you're a premium user you have to wait for `{str(sleep_time)}` seconds. Usual users have to wait for 120 seconds.\n\n⚠️ اسپم نزنید کاربر پریمیوم\n✨ با وجود کاربر پریمیوم بودن، شما باید `{str(sleep_time)}` ثانیه صبر کنید. کاربران عادی 120 ثانیه محدودیت دارند.", quote=True)
             else:
+                file = detect_type(m)
+                file_name = ''
+                if file:
+                    file_name = file.file_name
                 log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
                 stream_link = f"{Var.URL}{log_msg.message_id}/{quote_plus(get_name(m))}?hash={get_hash(log_msg)}"
                 short_link = f"{Var.URL}{get_hash(log_msg)}{log_msg.message_id}"
