@@ -74,10 +74,10 @@ async def help_handler(b, m : Message):
         fsub = await force_subscribe(b, m)
         if fsub == 400:
             return
-    u = await b.get_chat_member(int(Var.UPDATES_CHANNEL), message.from_user.id)
+    u = await b.get_chat_member(int(Var.UPDATES_CHANNEL), m.from_user.id)
     if u.status == "kicked" or u.status == "banned":
         await b.send_message(
-            chat_id=message.from_user.id,
+            chat_id=m.from_user.id,
             text="✨ You're Banned due not to pay attention to the [rules](https://t.me/FutureTechnologyOfficial/1257). Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8) if you think you've banned wrongly.\n\n✨ شما به علت عدم رعایت [قوانین](https://t.me/FutureTechnologyOfficial/1257) بن شده اید. اگر فکر میکنید بن شدن شما اشتباه بوده و قوانین را رعایت کرده اید می توانید با [گروه پشتیبانی](https://t.me/joinchat/riq-psSksFtiMDU8) در ارتباط باشید.",
             parse_mode="markdown",
             disable_web_page_preview=True
