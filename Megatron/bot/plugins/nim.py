@@ -45,8 +45,9 @@ async def nimdownloader(c: Client, m: Message):
     chat = m.chat
     while True:
         url = await StreamBot.ask(chat.id, "⚠️This part is only for Iranian users⚠️\n\n**لطفا لینک خود را ارسال کنید تا لینک نیم بهای آن را دریافت نمایید**")
-        if not url.text:
-            continue
+        if not "http" in url.text.lower():
+            await StreamBot.send_message(chat.id, "✨ لطفا لینک معتبر ارسال نمایید!") 
+            return
         txt = url.text.strip()
         if txt.startswith("/"):
             continue
