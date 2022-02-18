@@ -50,6 +50,18 @@ async def start(b, m : Message):
                 disable_web_page_preview=True
             )
 
+@StreamBot.on_message(filters.command('upgrade') & filters.private & ~filters.edited)
+async def upgrade(b, m : Message):
+    await m.reply(
+        text=f"""─────────────\n➰ **Daily Plan :**\n✗ 5 days - 5 dollar\n✗ 10 days - 10 dollar\n✗ 20 days - 20 dollar\n••••••••••••••••\n➰ **Monthly Plan :**\n✗ 1 month - 30 dollar\n✗ 3 months - 80 dollar\n✗ 6 months - 150 dollar\n••••••••••••••••\n➰ **Annual Plan :**\n✗ 1 year - 290 dollar\n─────────────\n─────────────\n➰ **پلن روزانه :**\n✗ 5 روزه - 5000 تومان \n✗ 10 روزه - 10000 تومان\n✗ 20 روزه - 20000 تومان\n••••••••••••••••\n➰ **پلن ماهانه :**\n✗ 1 ماهه - 30000 تومان\n✗ 3 ماهه - 80000 تومان\n✗ 6 ماهه - 150000 تومان\n••••••••••••••••\n➰ **پلن سالانه :**\n✗ 1 ساله - 290000 تومان\n─────────────\n✨ برای خرید روی دکمه زیر کلیک کنید""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [InlineKeyboardButton('✨ Buy & Contact ✨', url='https://t.me/CipherXBot')]
+            ]
+        ),
+        disable_web_page_preview=True
+    )
+
 @StreamBot.on_message(filters.command('help') & filters.private & ~filters.edited)
 async def help_handler(bot, message):
     if not await db.is_user_exist(message.from_user.id):
