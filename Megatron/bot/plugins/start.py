@@ -64,11 +64,11 @@ async def upgrade(b, m : Message):
 
 @StreamBot.on_message(filters.command('help') & filters.private & ~filters.edited)
 async def help_handler(b, m : Message):
-    if not await db.is_user_exist(message.from_user.id):
-        await db.add_user(message.from_user.id)
+    if not await db.is_user_exist(m.from_user.id):
+        await db.add_user(m.from_user.id)
         await b.send_message(
             Var.BIN_CHANNEL,
-            f"#NEW_USER: \n\nNew User [{message.from_user.first_name}](tg://user?id={message.from_user.id}) Started !!"
+            f"#NEW_USER: \n\nNew User [{m.from_user.first_name}](tg://user?id={m.from_user.id}) Started !!"
         )
     if Var.UPDATES_CHANNEL:
         fsub = await force_subscribe(b, m)
