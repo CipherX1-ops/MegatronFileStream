@@ -76,27 +76,11 @@ async def media_receive_handler(c: Client, m: Message):
         file_name = f"{m.photo.file_id}"
 
     try:
-        u = await c.get_chat_member(int(Var.UPDATES_CHANNEL), m.from_user.id)
-        if u.status == "kicked" or u.status == "banned":
-            await c.send_message(
-                chat_id=m.from_user.id,
-                text="✨ You're Banned due not to pay attention to the [rules](https://t.me/FutureTechnologyOfficial/1257). Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8) if you think you've banned wrongly.\n\n✨ شما به علت عدم رعایت [قوانین](https://t.me/FutureTechnologyOfficial/1257) بن شده اید. اگر فکر میکنید بن شدن شما اشتباه بوده و قوانین را رعایت کرده اید می توانید با [گروه پشتیبانی](https://t.me/joinchat/riq-psSksFtiMDU8) در ارتباط باشید.",
-                parse_mode="markdown",
-                disable_web_page_preview=True
-            )
         file = detect_type(m)
         file_name = ''
         if file and "GiB" in str(file_size) and not m.from_user.id in Var.PRO_USERS:
             await c.send_message(m.chat.id, "⚜️ Files with size more than 1GiB need premium subscription. For purchasing premium subscription press /upgrade command.\n\n⚜️ امکان دریافت لینک فایل هایی با حجم بیشتر از 1 گیگ فقط برای کاربران پریمیوم امکان پذیر است. جهت خرید اشتراک پریمیوم و برداشته شدن محدودیت ها کامند /upgrade را وارد نمایید.")
         else:
-            u = await c.get_chat_member(int(Var.UPDATES_CHANNEL), m.from_user.id)
-            if u.status == "kicked" or u.status == "banned":
-                await c.send_message(
-                    chat_id=m.from_user.id,
-                    text="✨ You're Banned due not to pay attention to the [rules](https://t.me/FutureTechnologyOfficial/1257). Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8) if you think you've banned wrongly.\n\n✨ شما به علت عدم رعایت [قوانین](https://t.me/FutureTechnologyOfficial/1257) بن شده اید. اگر فکر میکنید بن شدن شما اشتباه بوده و قوانین را رعایت کرده اید می توانید با [گروه پشتیبانی](https://t.me/joinchat/riq-psSksFtiMDU8) در ارتباط باشید.",
-                    parse_mode="markdown",
-                    disable_web_page_preview=True
-                )
             is_spam, sleep_time = await check_spam(m.from_user.id)
             if is_spam:
                 if m.from_user.id in Var.PRO_USERS:
@@ -104,6 +88,14 @@ async def media_receive_handler(c: Client, m: Message):
                 else:
                     await m.reply_text(f"⚠️ Don't spam!\n\n✨ You have to wait for `{str(sleep_time)}` seconds or purchasing premium subscription via /upgrade command.\n\n⚠️ اسپم نزنید!\n✨ شما باید `{str(sleep_time)}` ثانیه صبر کنید و یا اشتراک پریمیوم از طریق کامند /upgrade اشتراک پریمیوم تهیه نمایید.", quote=True)
             else:
+                u = await c.get_chat_member(int(Var.UPDATES_CHANNEL), m.from_user.id)
+                if u.status == "kicked" or u.status == "banned":
+                    await c.send_message(
+                        chat_id=m.from_user.id,
+                        text="✨ You're Banned due not to pay attention to the [rules](https://t.me/FutureTechnologyOfficial/1257). Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8) if you think you've banned wrongly.\n\n✨ شما به علت عدم رعایت [قوانین](https://t.me/FutureTechnologyOfficial/1257) بن شده اید. اگر فکر میکنید بن شدن شما اشتباه بوده و قوانین را رعایت کرده اید می توانید با [گروه پشتیبانی](https://t.me/joinchat/riq-psSksFtiMDU8) در ارتباط باشید.",
+                        parse_mode="markdown",
+                        disable_web_page_preview=True
+                    )
                 file_name = file.file_name
                 user_type = "#Pro_User" if m.from_user.id in Var.PRO_USERS else "#Ordinary_User" 
                 log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
