@@ -96,25 +96,26 @@ async def media_receive_handler(c: Client, m: Message):
                         parse_mode="markdown",
                         disable_web_page_preview=True
                     )
-                file_name = file.file_name
-                user_type = "#Pro_User" if m.from_user.id in Var.PRO_USERS else "#Ordinary_User" 
-                log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
-                stream_link = f"{Var.URL}{log_msg.message_id}/{quote_plus(get_name(m))}?hash={get_hash(log_msg)}"
-                short_link = f"{Var.URL}{get_hash(log_msg)}{log_msg.message_id}"
-                logging.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
-                msg_text = f"Your Link Generated! 😄\n\nلینک پر سرعت شما ایجاد شد! 😄\n\n📂 **File Name:** `{file_name}`\n\n**✨ File Size:** `{file_size}`\n\n📥 **Direct/Stream Link:** `{stream_link}`\n\n📥 **Short Link:** `{short_link}`"
-                await c.send_message(chat_id=Var.BIN_CHANNEL, text=f"✨ **Requested by:** [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n✨ **User ID:** `{m.from_user.id}`\n✨ **User Type:** `{user_type}`\n✨ **Download Link:** {stream_link}\n✨ **Short Link:** {short_link}", disable_web_page_preview=True, reply_to_message_id=log_msg.message_id, parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("࿋ Ban User ࿋", callback_data=f"ban_{m.from_user.id}")]])) 
-                await m.reply_text(
-                    text=msg_text, 
-                    reply_markup=InlineKeyboardMarkup(
-                        [
-                            [InlineKeyboardButton("࿋ Direct/Stream Link ࿋", url=stream_link)],
-                            [InlineKeyboardButton("࿋ Short Link ࿋", url=short_link)],
-                        ],
-                    ),
-                    quote=True, 
-                    parse_mode="Markdown"
-                )
+                else:
+                    file_name = file.file_name
+                    user_type = "#Pro_User" if m.from_user.id in Var.PRO_USERS else "#Ordinary_User" 
+                    log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
+                    stream_link = f"{Var.URL}{log_msg.message_id}/{quote_plus(get_name(m))}?hash={get_hash(log_msg)}"
+                    short_link = f"{Var.URL}{get_hash(log_msg)}{log_msg.message_id}"
+                    logging.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
+                    msg_text = f"Your Link Generated! 😄\n\nلینک پر سرعت شما ایجاد شد! 😄\n\n📂 **File Name:** `{file_name}`\n\n**✨ File Size:** `{file_size}`\n\n📥 **Direct/Stream Link:** `{stream_link}`\n\n📥 **Short Link:** `{short_link}`"
+                    await c.send_message(chat_id=Var.BIN_CHANNEL, text=f"✨ **Requested by:** [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n✨ **User ID:** `{m.from_user.id}`\n✨ **User Type:** `{user_type}`\n✨ **Download Link:** {stream_link}\n✨ **Short Link:** {short_link}", disable_web_page_preview=True, reply_to_message_id=log_msg.message_id, parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("࿋ Ban User ࿋", callback_data=f"ban_{m.from_user.id}")]])) 
+                    await m.reply_text(
+                        text=msg_text, 
+                        reply_markup=InlineKeyboardMarkup(
+                            [
+                                [InlineKeyboardButton("࿋ Direct/Stream Link ࿋", url=stream_link)],
+                                [InlineKeyboardButton("࿋ Short Link ࿋", url=short_link)],
+                            ],
+                        ),
+                        quote=True, 
+                        parse_mode="Markdown"
+                    )
             
     except FloodWait as e:
         print(f"Sleeping for {str(e.x)}s")
