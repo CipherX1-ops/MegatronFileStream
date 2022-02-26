@@ -4,4 +4,13 @@ natively: English
 authors:
   - VectorX
   
-start: ""
+fsub: "**Please join updates channel to use me**\nOnly channel subscribers can use the bot\nAfter joining tap help button"
+wrong: "Something went Wrong. Contact my [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8)."
+start: "Hey Dear  🙋🏻‍♂️\nI'm Telegram File to Link Generator Bot.\n\nSend me any file & get the fast direct download link!\n\n⚠ **Don't forget to read the [rules](https://t.me/FutureTechnologyOfficial/1257) first!**"
+banned: "✨ You're Banned due not to pay attention to the [rules](https://t.me/FutureTechnologyOfficial/1257). Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8) if you think you've banned wrongly."
+help: "✨ Send me any file, I'll give you its direct download link\n\nAlso I'm supported in channels. Add me to channel as admin to make me workable"
+pay: "─────────────\n➰ **Daily Plan :**\n✗ 5 days - 5 dollar\n✗ 10 days - 10 dollar\n✗ 20 days - 20 dollar\n••••••••••••••••\n➰ **Monthly Plan :**\n✗ 1 month - 30 dollar\n✗ 3 months - 80 dollar\n✗ 6 months - 150 dollar\n••••••••••••••••\n➰ **Annual Plan :**\n✗ 1 year - 290 dollar\n─────────────"
+limit: "⚜️ Files with size more than 1GiB need premium subscription. For purchasing premium subscription press /upgrade command."
+pro: "⚠️ Don't spam premium user\n\n✨ As you're a premium user you have to wait for `{}` seconds. Usual users have to wait for 120 seconds."
+usual: "⚠️ Don't spam!\n\n✨ You have to wait for `{}` seconds or purchasing premium subscription via /upgrade command."
+stream: "Your Link Generated! 😄\n\n📂 **File Name:** `{}`\n\n**✨ File Size:** `{}`\n\n📥 **Direct/Stream Link:** `{}`\n\n📥 **Short Link:** `{}`"
