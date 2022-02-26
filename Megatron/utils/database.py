@@ -7,7 +7,8 @@ class Database:
         self._client = motor.motor_asyncio.AsyncIOMotorClient(uri)
         self.db = self._client[database_name]
         self.col = self.db.users
-
+        self.trans = self.db.lang
+        
     def new_user(self, id):
         return dict(
             id=id,
@@ -21,7 +22,7 @@ class Database:
     async def is_user_exist(self, id):
         user = await self.col.find_one({'id': int(id)})
         return True if user else False
-
+        
     async def total_users_count(self):
         count = await self.col.count_documents({})
         return count
@@ -32,3 +33,19 @@ class Database:
 
     async def delete_user(self, user_id):
         await self.col.delete_many({'id': int(user_id)})
+        
+        
+    async def add_trans(self, lang):
+        language = self.new_user(lang)
+        await self.trans.insert_one(language)
+
+    async def is_trans_exist(self, lang):
+        language = await self.trans.find_one({'lang': str(lang)})
+        return True if language else False
+    
+    async def delete_trans(self, trans_lang):
+        await self.trans.delete_many({'lang': str(trans_lang)})
+        
+    async def update_trans(self, update_lang):
+        await self.trans.update_one(language, {"$set": {'lang': str(update_lang)}})
+        
