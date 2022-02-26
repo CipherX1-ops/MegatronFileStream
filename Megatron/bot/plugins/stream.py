@@ -85,9 +85,9 @@ async def media_receive_handler(c: Client, m: Message):
             is_spam, sleep_time = await check_spam(m.from_user.id)
             if is_spam:
                 if m.from_user.id in Var.PRO_USERS:
-                    await m.reply_text(get_string("pro").format(str(sleep_time), str(sleep_time)), quote=True)
+                    await m.reply_text(get_string("pro").format(str(sleep_time)), quote=True)
                 else:
-                    await m.reply_text(get_string("usual").format(str(sleep_time), str(sleep_time)), quote=True)
+                    await m.reply_text(get_string("usual").format(str(sleep_time)), quote=True)
             else:
                 u = await c.get_chat_member(int(Var.UPDATES_CHANNEL), m.from_user.id)
                 if u.status == "kicked" or u.status == "banned":
