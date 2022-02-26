@@ -7,6 +7,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
 from Megatron.vars import Var
 from Megatron.bot import StreamBot
+from Megatron.strings import get_string
 
 @StreamBot.on_message(filters.command("nim") & filters.private)
 async def nimdownloader(c: Client, m: Message):
@@ -16,7 +17,7 @@ async def nimdownloader(c: Client, m: Message):
             if user.status == "kicked":
                 await c.send_message(
                     chat_id=m.chat.id,
-                    text="Sorry, You are Banned to use me. Contact my [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8).",
+                    text=get_string("banned"),
                     parse_mode="markdown",
                     disable_web_page_preview=True
                 )
@@ -24,7 +25,7 @@ async def nimdownloader(c: Client, m: Message):
         except UserNotParticipant:
             await c.send_message(
                 chat_id=m.chat.id,
-                text="**Please join updates channel to use me**\nOnly channel subscribers can use the bot\nAfter joining tap help button\n\n✨لطفا در چنل عضو شوید. تنها اعضای چنل می توانند از بات استفاده کنند.\nپس از عضویت بر روی /help کلیک کنید.",
+                text=get_string("fsub"),
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -38,7 +39,7 @@ async def nimdownloader(c: Client, m: Message):
         except Exception:
             await c.send_message(
                 chat_id=m.chat.id,
-                text="Something went Wrong. Contact my [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8).",
+                text=get_string("wrong"),
                 parse_mode="markdown",
                 disable_web_page_preview=True)
             return
