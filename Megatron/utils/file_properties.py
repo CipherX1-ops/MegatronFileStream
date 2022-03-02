@@ -58,8 +58,8 @@ def get_hash(media_msg: Message) -> str:
 #    return getattr(media, "file_name", "")
 
 
-def get_name(message):
-    if message.file.name:
-        return quote(message.file.name)
-    ext = message.file.ext or ""
+def get_name(media_msg: Message) -> str: 
+    if media_msg.file.name:
+        return quote(media_msg.file.name)
+    ext = media_msg.file.ext or ""
     return f"file{ext}"
