@@ -1,4 +1,5 @@
 from typing import Any, Optional
+from urllib.parse import quote
 
 from pyrogram import Client
 from pyrogram.types import Message
@@ -52,6 +53,13 @@ def get_hash(media_msg: Message) -> str:
     media = get_media_from_message(media_msg)
     return getattr(media, "file_unique_id", "")[:6]
 
-def get_name(media_msg: Message) -> str:
-    media = get_media_from_message(media_msg)
-    return getattr(media, "file_name", "")
+#def get_name(media_msg: Message) -> str:
+#    media = get_media_from_message(media_msg)
+#    return getattr(media, "file_name", "")
+
+
+def get_name(media_msg: Message) -> str: 
+    if media_msg.file.name:
+        return quote(media_msg.file.name)
+    ext = media_msg.file.ext or ""
+    return f"file{ext}"
