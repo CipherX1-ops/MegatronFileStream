@@ -3,6 +3,7 @@ import logging
 import requests
 from flask import Flask, request, redirect
 from aiohttp import web
+from waitress import serve
 
 from pyrogram import idle
 
@@ -57,7 +58,7 @@ async def start_services():
         print()
         asyncio.create_task(utils.ping_server())
     print("-------------------- Initalizing Web Server --------------------")
-    await vector.run(host="0.0.0.0" if Var.ON_HEROKU else Var.BIND_ADDRESS , debug=False)
+    await serve(vector, host="0.0.0.0" if Var.ON_HEROKU else Var.BIND_ADDRESS , port=Var.PORT)
     app = web.AppRunner(await web_server())
     await app.setup()
     bind_address = "0.0.0.0" if Var.ON_HEROKU else Var.BIND_ADDRESS
