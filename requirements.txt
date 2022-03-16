@@ -1,6 +1,8 @@
 aiohttp
 aiofiles
 dnspython
+Flask
+gunicorn
 motor
 pyrogram
 pyromod
