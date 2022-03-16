@@ -1,4 +1,5 @@
 import sys
+import asyncio
 import logging
 from os import listdir, path
 from typing import Any, Dict, List, Union
@@ -38,7 +39,7 @@ for file in listdir(strings_folder):
             logging.exception(er)
 
 
-def get_string(key: str) -> Any:
+async def get_string(key: str) -> Any:
     lang = language[0]
     try:
         return languages[lang][key]
@@ -64,7 +65,7 @@ def get_string(key: str) -> Any:
         return languages["en"].get(key) or f"Failed to load language string '{key}'"
 
 
-def get_languages() -> Dict[str, Union[str, List[str]]]:
+async def get_languages() -> Dict[str, Union[str, List[str]]]:
     return {
         code: {
             "name": languages[code]["name"],
