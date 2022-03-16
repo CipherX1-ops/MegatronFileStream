@@ -1,8 +1,13 @@
 import asyncio
 import logging
-from .vars import Var
+import requests
+from flask import Flask, request, redirect
 from aiohttp import web
+from waitress import serve
+
 from pyrogram import idle
+
+from .vars import Var 
 from Megatron import utils
 from Megatron import bot_info
 from Megatron.server import web_server
@@ -18,6 +23,27 @@ logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
 
 loop = asyncio.get_event_loop()
 
+vector = Flask(__name__)
+
+@vector.route("/")
+async def main():
+    headers_list = request.headers.getlist("X-Forwarded-For")
+    user_ip = headers_list[0] if headers_list else request.remote_addr
+    url = f"http://ip-api.com/json/{user_ip}?fields=message,country,regionName,city,lat,lon,isp,as,mobile,proxy,hosting,query"
+    response = requests.get(url)
+    info = response.json()
+    tracker = f"""*✨ IP Address:* {info['query']}
+    *✨ Country:* `{info['country']}`
+    *✨ Region Name:* `{info['regionName']}`
+    *✨ City:* `{info['city']}`
+    *✨ Latitude:* `{info['lat']}`
+    *✨ Longitude:* `{info['lon']}`
+    *✨ ISP:* `{info['isp']}`
+    *✨ As:* `{info['as']}`
+    *✨ User on Mobile:* `{info['mobile']}`
+    *✨ Proxy:* `{info['proxy']}`
+    *✨ Hosting:* `{info['hosting']}`
+    """
 
 async def start_services():
     print("----------------------------- DONE -----------------------------")
@@ -32,6 +58,7 @@ async def start_services():
         print()
         asyncio.create_task(utils.ping_server())
     print("-------------------- Initalizing Web Server --------------------")
+    await serve(vector, host="0.0.0.0" if Var.ON_HEROKU else Var.BIND_ADDRESS , port=Var.PORT)
     app = web.AppRunner(await web_server())
     await app.setup()
     bind_address = "0.0.0.0" if Var.ON_HEROKU else Var.BIND_ADDRESS
