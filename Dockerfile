@@ -7,6 +7,6 @@ RUN pip3 install -U pip
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -U -r requirements.txt
 COPY . .
-ENV PORT = 8000
-EXPOSE 8000
+ENV PORT = 8080
+EXPOSE 8080
 CMD python3 -m Megatron
