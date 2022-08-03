@@ -1,9 +1,9 @@
-aiohttp
+aiohttp<=3.8.1
 aiofiles
 dnspython
 motor
-pyrogram
+pyrogram<=2.0.33
 pyromod
-python-dotenv
+python-dotenv<=0.20.0
 requests
-tgcrypto
+tgcrypto<=1.2.3
