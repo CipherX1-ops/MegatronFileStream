@@ -9,7 +9,7 @@ from aiohttp.http_exceptions import BadStatusLine
 
 from Megatron.bot import multi_clients, work_loads
 from Megatron.server.exceptions import FIleNotFound, InvalidHash
-from Megatron import Var, utils, StartTime, __version__, bot_info
+from Megatron import Var, utils, StartTime, __version__
 
 
 routes = web.RouteTableDef()
@@ -20,7 +20,7 @@ async def root_route_handler(_):
         {
             "⁂ Server Status": "running",
             "⁂ Uptime": utils.get_readable_time(time.time() - StartTime),
-            "⁂ Telegram Bot": "@" + bot_info.username,
+            "⁂ Telegram Bot": "@FiletoLinkTelegramBot",
             "⁂ Connected_ Bots": len(multi_clients),
             "⁂ Loads": dict(
                 ("bot" + str(c + 1), l)
