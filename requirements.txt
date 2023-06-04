@@ -3,7 +3,7 @@ aiofiles
 dnspython
 motor
 pyrogram<=2.0.33
-pyromod
+pyromod==1.5
 python-dotenv<=0.20.0
 requests
 tgcrypto<=1.2.3
