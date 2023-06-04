@@ -64,7 +64,7 @@ async def start_services():
     await idle()
 
 async def cleanup():
-    #await server.cleanup()
+    await server.cleanup()
     if StreamBot.is_connected:
         await StreamBot.stop()
 
