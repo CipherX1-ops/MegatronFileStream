@@ -63,10 +63,10 @@ async def start_services():
     print("------------------------------------------------------------------")
     await idle()
 
-async def cleanup():
-    await server.cleanup()
-    if StreamBot.is_connected:
-        await StreamBot.stop()
+#async def cleanup():
+    #await server.cleanup()
+    #if StreamBot.is_connected:
+        #await StreamBot.stop()
 
 if __name__ == "__main__":
     try:
@@ -76,6 +76,6 @@ if __name__ == "__main__":
     except Exception as err:
         logging.error(err.with_traceback(None))
     finally:
-        loop.run_until_complete(cleanup())
+        #loop.run_until_complete(cleanup())
         loop.stop()
         print("------------------------ Stopped Services ------------------------")
