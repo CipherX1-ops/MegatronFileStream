@@ -1,3 +1,5 @@
+import os
+import signal
 import sys
 import asyncio
 import logging
@@ -67,15 +69,17 @@ async def cleanup():
     await server.cleanup()
     if StreamBot.is_connected:
         await StreamBot.stop()
-
+        
+async def handle_termination(signum, frame):
+    print("Received termination signal")
+    await cleanup()
+    sys.exit(0)
+    
 if __name__ == "__main__":
+    signal.signal(signal.SIGINT, lambda s,f: asyncio.ensure_future(handle_termination(s,f)))
+    signal.signal(signal.SIGTERM, lambda s,f: asyncio.ensure_future(handle_termination(s,f)))
     try:
         loop.run_until_complete(start_services())
+        loop.run_forever()
     except KeyboardInterrupt:
-        pass
-    except Exception as err:
-        logging.error(err.with_traceback(None))
-    finally:
-        loop.run_until_complete(cleanup())
-        loop.stop()
         print("------------------------ Stopped Services ------------------------")
