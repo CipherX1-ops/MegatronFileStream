@@ -11,7 +11,7 @@ from Megatron.handlers.fsub import force_subscribe
 db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
 
 
-@StreamBot.on_message(filters.command('start') & filters.private & ~filters.edited)
+@StreamBot.on_message(filters.command('start') & filters.private)
 async def start(b, m : Message):
     if not await db.is_user_exist(m.from_user.id):
         await db.add_user(m.from_user.id)
@@ -50,7 +50,7 @@ async def start(b, m : Message):
                 disable_web_page_preview=True
             )
 
-@StreamBot.on_message(filters.command('upgrade') & filters.private & ~filters.edited)
+@StreamBot.on_message(filters.command('upgrade') & filters.private)
 async def upgrade(b, m : Message):
     await m.reply(
         text=f"""─────────────\n➰ **Daily Plan :**\n✗ 5 days - 5 dollar\n✗ 10 days - 10 dollar\n✗ 20 days - 20 dollar\n••••••••••••••••\n➰ **Monthly Plan :**\n✗ 1 month - 30 dollar\n✗ 3 months - 80 dollar\n✗ 6 months - 150 dollar\n••••••••••••••••\n➰ **Annual Plan :**\n✗ 1 year - 290 dollar\n─────────────\n─────────────\n➰ **پلن ماهانه :**\n✗ 3 ماهه - 80000 تومان\n✗ 6 ماهه - 150000 تومان\n••••••••••••••••\n➰ **پلن سالانه :**\n✗ 1 ساله - 290000 تومان\n─────────────\n✨ برای خرید روی دکمه زیر کلیک کنید""",
@@ -62,7 +62,7 @@ async def upgrade(b, m : Message):
         disable_web_page_preview=True
     )
 
-@StreamBot.on_message(filters.command('help') & filters.private & ~filters.edited)
+@StreamBot.on_message(filters.command('help') & filters.private)
 async def help_handler(b, m : Message):
     if not await db.is_user_exist(m.from_user.id):
         await db.add_user(m.from_user.id)
