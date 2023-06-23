@@ -5,6 +5,7 @@ from urllib.parse import quote_plus
 from pyrogram import filters, Client
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.enums import ParseMode
 
 from Megatron.bot import StreamBot
 from Megatron.utils import get_hash, get_name
@@ -93,7 +94,7 @@ async def media_receive_handler(c: Client, m: Message):
                     await c.send_message(
                         chat_id=m.from_user.id,
                         text="✨ You're Banned due not to pay attention to the [rules](https://t.me/FutureTechnologyOfficial/1257). Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8) if you think you've banned wrongly.\n\n✨ شما به علت عدم رعایت [قوانین](https://t.me/FutureTechnologyOfficial/1257) بن شده اید. اگر فکر میکنید بن شدن شما اشتباه بوده و قوانین را رعایت کرده اید می توانید با [گروه پشتیبانی](https://t.me/joinchat/riq-psSksFtiMDU8) در ارتباط باشید.",
-                        parse_mode="markdown",
+                        parse_mode=ParseMode.MARKDOWN,
                         disable_web_page_preview=True
                     )
                 else:
