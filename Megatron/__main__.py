@@ -65,21 +65,21 @@ async def start_services():
     print("------------------------------------------------------------------")
     await idle()
 
-async def cleanup():
-    await server.cleanup()
-    if StreamBot.is_connected:
-        await StreamBot.stop()
+#async def cleanup():
+    #await server.cleanup()
+    #if StreamBot.is_connected:
+        #await StreamBot.stop()
         
-async def handle_termination(signum, frame):
-    print("Received termination signal")
-    await cleanup()
-    sys.exit(0)
+#async def handle_termination(signum, frame):
+    #print("Received termination signal")
+    #await cleanup()
+    #sys.exit(0)
     
 if __name__ == "__main__":
-    signal.signal(signal.SIGINT, lambda s,f: asyncio.ensure_future(handle_termination(s,f)))
-    signal.signal(signal.SIGTERM, lambda s,f: asyncio.ensure_future(handle_termination(s,f)))
+    #signal.signal(signal.SIGINT, lambda s,f: asyncio.ensure_future(handle_termination(s,f)))
+    #signal.signal(signal.SIGTERM, lambda s,f: asyncio.ensure_future(handle_termination(s,f)))
     try:
         loop.run_until_complete(start_services())
-        loop.run_forever()
+        #loop.run_forever()
     except KeyboardInterrupt:
         print("------------------------ Stopped Services ------------------------")
