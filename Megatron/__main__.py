@@ -1,5 +1,5 @@
 import os
-import signal
+#import signal
 import sys
 import asyncio
 import logging
