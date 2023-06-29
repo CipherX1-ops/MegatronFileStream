@@ -2,6 +2,7 @@ import asyncio
 
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.enums import ParseMode
 
 from Megatron.vars import Var
 from Megatron.utils.callbacks import *
@@ -18,7 +19,7 @@ async def force_subscribe(bot, cmd):
             await bot.send_message(
                 chat_id=cmd.from_user.id,
                 text="✨ You are Banned due not to pay attention to the [rules](https://t.me/FutureTechnologyOfficial/1257). Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8) if you think you've banned wrongly.\n\n✨ شما به علت عدم رعایت [قوانین](https://t.me/FutureTechnologyOfficial/1257) بن شده اید. اگر فکر میکنید بن شدن شما اشتباه بوده و قوانین را رعایت کرده اید می توانید با [گروه پشتیبانی](https://t.me/joinchat/riq-psSksFtiMDU8) در ارتباط باشید.",
-                parse_mode="markdown",
+                parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True
             )
             return 400
@@ -36,14 +37,14 @@ async def force_subscribe(bot, cmd):
                     ]
                 ]
             ),
-            parse_mode="markdown"
+            parse_mode=ParseMode.MARKDOWN
         )
         return 400
     except Exception:
         await bot.send_message(
             chat_id=cmd.from_user.id,
             text="Something went Wrong. Contact [Support Group](https://t.me/joinchat/riq-psSksFtiMDU8).",
-            parse_mode="markdown",
+            parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True
         )
         return 400
