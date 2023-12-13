@@ -1,4 +1,6 @@
-aiohttp<=3.8.1
+fastapi==0.74.*
+uvicorn[standard]==0.17.*
+pydantic
 aiofiles
 dnspython
 motor
